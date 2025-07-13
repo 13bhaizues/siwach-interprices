@@ -1,3 +1,4 @@
+import { getMenProducts, getWomenProducts } from '../data/products';
 import React, { useState, Fragment } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
