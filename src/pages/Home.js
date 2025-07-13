@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon, PlayIcon } from '@heroicons/react/24/outline';
-import { getEnhancedFeaturedProducts } from '../data/enhancedProducts';
+import { getFeaturedProducts } from '../data/allProducts';
 
 // Hero carousel data with premium dark imagery
 const heroSlides = [
@@ -61,7 +61,7 @@ const scaleOnHover = {
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const featuredProducts = getEnhancedFeaturedProducts();
+  const featuredProducts = getFeaturedProducts();
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -278,7 +278,7 @@ export default function Home() {
                         to={`/product/${product.id}`}
                         className="bg-white text-black px-6 py-3 font-bold hover:bg-gray-100 transition-colors duration-200 rounded-xl"
                       >
-                        VIEW
+                        BUY
                       </Link>
                       <button className="bg-accent text-white px-6 py-3 font-bold hover:bg-accent-600 transition-colors duration-200 rounded-xl">
                         ADD TO CART

@@ -1,3 +1,4 @@
+import { getMenProducts, getWomenProducts } from '../data/products';
 import React, { useState, Fragment } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -6,7 +7,11 @@ import { XMarkIcon, FunnelIcon, EyeIcon, HeartIcon, ShoppingBagIcon } from '@her
 import { ChevronDownIcon, StarIcon } from '@heroicons/react/20/solid';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
-import { getEnhancedProductsByCategory, enhancedProducts } from '../data/enhancedProducts';
+import { 
+  getProductsByCategory, 
+ 
+  allProducts 
+} from '../data/allProducts';
 
 const sortOptions = [
   { name: 'Most Popular', value: 'popular', current: true },
@@ -72,8 +77,17 @@ export default function Products() {
 
   const category = searchParams.get('category');
   
-  // Get products based on category
-  let products = category ? getEnhancedProductsByCategory(category) : enhancedProducts;
+  // Get products based on category or section
+  let products;
+  if (category === 'men') {
+    products = getMenProducts();
+  } else if (category === 'women') {
+    products = getWomenProducts();
+  } else if (category) {
+    products = getProductsByCategory(category);
+  } else {
+    products = allProducts;
+  }
 
   // Apply additional filters
   Object.keys(selectedFilters).forEach(filterType => {

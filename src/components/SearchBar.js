@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { searchEnhancedProducts } from '../data/enhancedProducts';
+import { searchProducts } from '../data/allProducts';
 
 export default function SearchBar({ isOpen, onClose }) {
   const [query, setQuery] = useState('');
@@ -20,7 +20,7 @@ export default function SearchBar({ isOpen, onClose }) {
     if (query.length > 2) {
       setIsLoading(true);
       const timeoutId = setTimeout(() => {
-        const searchResults = searchEnhancedProducts(query).slice(0, 6);
+        const searchResults = searchProducts(query).slice(0, 6);
         setResults(searchResults);
         setIsLoading(false);
       }, 300);
