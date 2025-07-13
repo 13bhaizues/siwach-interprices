@@ -10,17 +10,17 @@ const megaMenuData = {
       {
         name: 'Footwear',
         items: [
-          { name: 'Running Shoes', href: '/products?category=men&type=running', image: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Training Shoes', href: '/products?category=men&type=training', image: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Lifestyle Sneakers', href: '/products?category=men&type=lifestyle', image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=300' }
+          { name: 'Running Shoes', href: '/products?category=running', image: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Training Shoes', href: '/products?category=training', image: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Lifestyle Sneakers', href: '/products?category=lifestyle', image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=300' }
         ]
       },
       {
         name: 'Apparel',
         items: [
-          { name: 'Hoodies & Sweatshirts', href: '/products?category=men&type=hoodies', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Training Shorts', href: '/products?category=men&type=shorts', image: 'https://images.pexels.com/photos/7432771/pexels-photo-7432771.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Performance Tees', href: '/products?category=men&type=tees', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' }
+          { name: 'Hoodies & Sweatshirts', href: '/products?category=lifestyle', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Training Shorts', href: '/products?category=training', image: 'https://images.pexels.com/photos/7432771/pexels-photo-7432771.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Performance Tees', href: '/products?category=training', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' }
         ]
       }
     ],
@@ -28,7 +28,7 @@ const megaMenuData = {
       title: 'Featured Collection',
       subtitle: 'Velocity Pro Series',
       image: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400',
-      href: '/products?featured=velocity-pro'
+      href: '/products?category=men'
     }
   },
   women: {
@@ -37,17 +37,17 @@ const megaMenuData = {
       {
         name: 'Footwear',
         items: [
-          { name: 'Running Shoes', href: '/products?category=women&type=running', image: 'https://i.pinimg.com/1200x/f1/31/16/f13116cbb3a4e1cabcc24c077e5c4719.jpg' },
-          { name: 'Training Shoes', href: '/products?category=women&type=training', image: 'https://i.pinimg.com/1200x/f1/31/16/f13116cbb3a4e1cabcc24c077e5c4719.jpg' },
-          { name: 'Lifestyle Sneakers', href: '/products?category=women&type=lifestyle', image: 'https://i.pinimg.com/1200x/f1/31/16/f13116cbb3a4e1cabcc24c077e5c4719.jpg' }
+          { name: 'Running Shoes', href: '/products?category=running', image: 'https://i.pinimg.com/1200x/f1/31/16/f13116cbb3a4e1cabcc24c077e5c4719.jpg' },
+          { name: 'Training Shoes', href: '/products?category=training', image: 'https://i.pinimg.com/1200x/f1/31/16/f13116cbb3a4e1cabcc24c077e5c4719.jpg' },
+          { name: 'Lifestyle Sneakers', href: '/products?category=lifestyle', image: 'https://i.pinimg.com/1200x/f1/31/16/f13116cbb3a4e1cabcc24c077e5c4719.jpg' }
         ]
       },
       {
         name: 'Apparel',
         items: [
-          { name: 'Sports Bras', href: '/products?category=women&type=bras', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Leggings & Tights', href: '/products?category=women&type=leggings', image: 'https://images.pexels.com/photos/7432771/pexels-photo-7432771.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Training Jackets', href: '/products?category=women&type=jackets', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' }
+          { name: 'Sports Bras', href: '/products?category=training', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Leggings & Tights', href: '/products?category=training', image: 'https://images.pexels.com/photos/7432771/pexels-photo-7432771.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Training Jackets', href: '/products?category=training', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' }
         ]
       }
     ],
@@ -55,7 +55,7 @@ const megaMenuData = {
       title: 'Featured Collection',
       subtitle: 'Stealth Training Series',
       image: 'https://images.pexels.com/photos/7432771/pexels-photo-7432771.jpeg?auto=compress&cs=tinysrgb&w=400',
-      href: '/products?featured=stealth-training'
+      href: '/products?category=women'
     }
   },
   tech: {
@@ -64,17 +64,17 @@ const megaMenuData = {
       {
         name: 'Wearables',
         items: [
-          { name: 'Fitness Trackers', href: '/products?category=tech&type=trackers', image: 'https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Smart Watches', href: '/products?category=tech&type=watches', image: 'https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Heart Rate Monitors', href: '/products?category=tech&type=monitors', image: 'https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=300' }
+          { name: 'Fitness Trackers', href: '/products?category=tech', image: 'https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Smart Watches', href: '/products?category=tech', image: 'https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Heart Rate Monitors', href: '/products?category=tech', image: 'https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=300' }
         ]
       },
       {
         name: 'Audio',
         items: [
-          { name: 'Wireless Earbuds', href: '/products?category=tech&type=earbuds', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Sports Headphones', href: '/products?category=tech&type=headphones', image: 'https://images.pexels.com/photos/7432771/pexels-photo-7432771.jpeg?auto=compress&cs=tinysrgb&w=300' },
-          { name: 'Bluetooth Speakers', href: '/products?category=tech&type=speakers', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' }
+          { name: 'Wireless Earbuds', href: '/products?category=tech', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Sports Headphones', href: '/products?category=tech', image: 'https://images.pexels.com/photos/7432771/pexels-photo-7432771.jpeg?auto=compress&cs=tinysrgb&w=300' },
+          { name: 'Bluetooth Speakers', href: '/products?category=tech', image: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=300' }
         ]
       }
     ],
@@ -82,7 +82,7 @@ const megaMenuData = {
       title: 'Featured Collection',
       subtitle: 'Quantum Series',
       image: 'https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=400',
-      href: '/products?featured=quantum-series'
+      href: '/products?category=tech'
     }
   }
 };

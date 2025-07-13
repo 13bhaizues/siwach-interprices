@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
-import { getEnhancedProductById } from '../data/enhancedProducts';
+import { getProductById } from '../data/allProducts';
 import { StarIcon, HeartIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 import ProductBadge from '../components/ProductBadge';
@@ -11,7 +11,7 @@ import ProductBadge from '../components/ProductBadge';
 export default function ProductDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const product = getEnhancedProductById(id);
+  const product = getProductById(id);
   
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedImage, setSelectedImage] = useState(0);
