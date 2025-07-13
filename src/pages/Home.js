@@ -278,7 +278,7 @@ export default function Home() {
                         to={`/product/${product.id}`}
                         className="bg-white text-black px-6 py-3 font-bold hover:bg-gray-100 transition-colors duration-200 rounded-xl"
                       >
-                        VIEW
+                        BUY
                       </Link>
                       <button className="bg-accent text-white px-6 py-3 font-bold hover:bg-accent-600 transition-colors duration-200 rounded-xl">
                         ADD TO CART

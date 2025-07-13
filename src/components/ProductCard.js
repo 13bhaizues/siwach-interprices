@@ -135,7 +135,7 @@ export default function ProductCard({ product, index = 0, className = '' }) {
                 className="bg-white text-black p-3 font-bold hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2"
               >
                 <EyeIcon className="h-4 w-4" />
-                <span className="hidden sm:inline">VIEW</span>
+                <span className="hidden sm:inline">BUY</span>
               </motion.button>
               <motion.button 
                 onClick={handleAddToCart}
@@ -214,7 +214,7 @@ export default function ProductCard({ product, index = 0, className = '' }) {
               onClick={handleBuyNow}
               className="flex-1 bg-white text-black py-2 px-4 font-bold text-sm hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
             >
-              BUY NOW
+              BUY
             </button>
             <button
               onClick={handleAddToCart}
