@@ -23,36 +23,40 @@ export default function ProductCard({ product, index = 0, className = '' }) {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  /* ---------- Helpers ---------- */
+  /* ---------- Image fallback ---------- */
+  // Uses imageSrc → image → placeholder (in that order)
+  const imgSrc = product.imageSrc || product.image || '/placeholder.png';
 
-  const safeSize = product.sizes?.[0] || 'default';          // ← avoids undefined
+  /* ---------- Helpers ---------- */
+  const safeSize = product.sizes?.[0] || 'default';
   const reviewCount =
     typeof product.reviews === 'number'
       ? product.reviews
       : product.reviews?.length || 0;
 
   const averageRating = product.rating ?? 0;
-
   const discountPercentage = product.originalPrice
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    ? Math.round(
+        ((product.originalPrice - product.price) / product.originalPrice) * 100
+      )
     : 0;
 
   const renderStars = (rating) => {
     const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
+    const full = Math.floor(rating);
+    const half = rating % 1 !== 0;
 
     for (let i = 0; i < 5; i++) {
-      if (i < fullStars) {
+      if (i < full) {
         stars.push(<StarIconSolid key={i} className="h-4 w-4 text-yellow-400" />);
-      } else if (i === fullStars && hasHalfStar) {
+      } else if (i === full && half) {
         stars.push(
           <div key={i} className="relative">
             <StarIcon className="h-4 w-4 text-gray-400" />
             <div className="absolute inset-0 overflow-hidden w-1/2">
               <StarIconSolid className="h-4 w-4 text-yellow-400" />
             </div>
-          </div>,
+          </div>
         );
       } else {
         stars.push(<StarIcon key={i} className="h-4 w-4 text-gray-400" />);
@@ -62,27 +66,24 @@ export default function ProductCard({ product, index = 0, className = '' }) {
   };
 
   /* ---------- Actions ---------- */
-
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
     dispatch(
       addToCart({
         id: product.id,
         name: product.name,
         price: product.price,
-        image: product.imageSrc,        // fixed field name
+        image: imgSrc, // ← use the same safe source
         size: safeSize,
-      }),
+      })
     );
   };
 
   const handleBuyNow = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    handleAddToCart(e);               // add first
+    handleAddToCart(e); // add first
     window.location.href = '/checkout';
   };
 
@@ -93,7 +94,6 @@ export default function ProductCard({ product, index = 0, className = '' }) {
   };
 
   /* ---------- Render ---------- */
-
   return (
     <motion.div
       initial={{ y: 50, opacity: 0 }}
@@ -124,9 +124,11 @@ export default function ProductCard({ product, index = 0, className = '' }) {
 
         {/* Image */}
         <div className="relative overflow-hidden aspect-square bg-gray-900">
-          {!imageLoaded && <div className="absolute inset-0 bg-gray-800 animate-pulse" />}
+          {!imageLoaded && (
+            <div className="absolute inset-0 bg-gray-800 animate-pulse" />
+          )}
           <img
-            src={product.imageSrc}            /* ← fixed */
+            src={imgSrc}
             alt={product.name}
             className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
@@ -140,7 +142,7 @@ export default function ProductCard({ product, index = 0, className = '' }) {
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
             <div className="flex gap-3">
               <motion.button
-                onClick={handleBuyNow}           /* ← now works */
+                onClick={handleBuyNow}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-black p-3 font-bold hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2"
