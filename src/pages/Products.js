@@ -1,4 +1,3 @@
-import { getMenProducts, getWomenProducts } from '../data/products';
 import React, { useState, Fragment } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -9,8 +8,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 import { 
   getProductsByCategory, 
-  getProductsByGender, 
-  getProductsBySection,
+ 
   allProducts 
 } from '../data/allProducts';
 
