@@ -78,11 +78,7 @@ export default function Products() {
   
   // Get products based on category or section
   let products;
-  if (category === 'men') {
-    products = getMenProducts();
-  } else if (category === 'women') {
-    products = getWomenProducts();
-  } else if (category) {
+  if (category) {
     products = getProductsByCategory(category);
   } else {
     products = allProducts;
