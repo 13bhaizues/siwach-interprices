@@ -1,5 +1,5 @@
 // Enhanced Product Collection for Siwach Enterprises
-import { getMenProducts, getWomenProducts } from '../data/enhancedProducts';
+
 export const enhancedProducts = [
   // Men's Collection - Premium Athletic Wear
   {
