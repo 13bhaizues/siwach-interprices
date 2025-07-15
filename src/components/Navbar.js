@@ -25,8 +25,6 @@ import SearchBar from './SearchBar';
 //    (adjust path to ../../hooks/... if Navbar is nested deeper)
 import { useNavigationHistory } from '../hooks/useNavigationHistory';
 
-
-
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Men', href: '/products?category=men' },
