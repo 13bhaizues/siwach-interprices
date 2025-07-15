@@ -97,13 +97,13 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-black text-white pt-16 sm:pt-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start"
+          className="lg:grid lg:grid-cols-2 lg:gap-x-6 xl:gap-x-8 lg:items-start"
         >
           {/* Image gallery */}
           <div className="flex flex-col">
@@ -116,7 +116,7 @@ export default function ProductDetail() {
             </div>
             
             {product.images && product.images.length > 1 && (
-              <div className="mt-4 grid grid-cols-4 gap-4">
+              <div className="mt-3 sm:mt-4 grid grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
                 {product.images.map((image, index) => (
                   <button
                     key={index}
@@ -141,22 +141,22 @@ export default function ProductDetail() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0"
+            className="mt-6 sm:mt-8 lg:mt-0 px-0"
           >
             {/* Badge */}
             {product.badge && (
-              <div className="mb-4">
+              <div className="mb-3 sm:mb-4">
                 <ProductBadge badge={product.badge} />
               </div>
             )}
 
-            <h1 className="text-3xl md:text-4xl font-black tracking-tight text-white mb-4">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white mb-3 sm:mb-4 leading-tight">
               {product.name}
             </h1>
 
             {/* Rating */}
             {product.reviews?.length > 0 && (
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <div className="flex items-center gap-2">
                   <div className="flex items-center">
                     {renderStars(averageRating)}
@@ -172,13 +172,13 @@ export default function ProductDetail() {
             )}
 
             {/* Price */}
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <div className="flex items-center gap-4">
-                <span className="text-4xl font-black text-white">
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-white">
                   ₹{product.price.toLocaleString()}
                 </span>
                 {product.originalPrice && (
-                  <span className="text-xl text-gray-500 line-through">
+                  <span className="text-lg sm:text-xl text-gray-500 line-through">
                     ₹{product.originalPrice.toLocaleString()}
                   </span>
                 )}
@@ -191,14 +191,14 @@ export default function ProductDetail() {
             </div>
 
             {/* Description */}
-            <div className="mb-8 space-y-6">
+            <div className="mb-6 sm:mb-8 space-y-4 sm:space-y-6">
               {/* Tabs */}
               <div className="flex border-b border-gray-700">
                 {['description', 'specs', 'reviews'].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`px-6 py-3 font-bold uppercase tracking-wider transition-colors duration-300 ${
+                    className={`px-3 sm:px-4 lg:px-6 py-2 sm:py-3 font-bold uppercase tracking-wider transition-colors duration-300 text-xs sm:text-sm ${
                       activeTab === tab
                         ? 'text-white border-b-2 border-blue-400'
                         : 'text-gray-400 hover:text-white'
@@ -210,18 +210,18 @@ export default function ProductDetail() {
               </div>
 
               {/* Tab Content */}
-              <div className="min-h-[200px]">
+              <div className="min-h-[150px] sm:min-h-[200px]">
                 {activeTab === 'description' && (
                   <div className="space-y-4">
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
                       {product.fullDescription}
                     </p>
                     {product.features && (
                       <div>
-                        <h4 className="text-white font-bold mb-3">Key Features:</h4>
+                        <h4 className="text-white font-bold mb-2 sm:mb-3 text-sm sm:text-base">Key Features:</h4>
                         <ul className="space-y-2">
                           {product.features.map((feature, index) => (
-                            <li key={index} className="text-gray-300 flex items-start">
+                            <li key={index} className="text-gray-300 flex items-start text-sm sm:text-base">
                               <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 mt-2 flex-shrink-0" />
                               {feature}
                             </li>
@@ -233,9 +233,9 @@ export default function ProductDetail() {
                 )}
 
                 {activeTab === 'specs' && product.specifications && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     {Object.entries(product.specifications).map(([key, value]) => (
-                      <div key={key} className="flex justify-between py-2 border-b border-gray-800">
+                      <div key={key} className="flex justify-between py-2 border-b border-gray-800 text-sm sm:text-base">
                         <span className="text-gray-400">{key}:</span>
                         <span className="text-white font-bold">{value}</span>
                       </div>
@@ -244,13 +244,13 @@ export default function ProductDetail() {
                 )}
 
                 {activeTab === 'reviews' && (
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {product.reviews?.length > 0 ? (
                       product.reviews.map((review) => (
-                        <div key={review.id} className="bg-gray-900 border border-gray-800 p-6">
+                        <div key={review.id} className="bg-gray-900 border border-gray-800 p-4 sm:p-6">
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-4">
-                              <span className="font-bold text-white">{review.name}</span>
+                              <span className="font-bold text-white text-sm sm:text-base">{review.name}</span>
                               {review.verified && (
                                 <span className="text-xs bg-green-500 text-white px-2 py-1 rounded">
                                   ✓ Verified Purchase
@@ -264,11 +264,11 @@ export default function ProductDetail() {
                               <span className="text-xs text-gray-400">{review.date}</span>
                             </div>
                           </div>
-                          <p className="text-gray-300">{review.comment}</p>
+                          <p className="text-gray-300 text-sm sm:text-base">{review.comment}</p>
                         </div>
                       ))
                     ) : (
-                      <p className="text-gray-400">No reviews yet. Be the first to review this product!</p>
+                      <p className="text-gray-400 text-sm sm:text-base">No reviews yet. Be the first to review this product!</p>
                     )}
                   </div>
                 )}
@@ -277,9 +277,9 @@ export default function ProductDetail() {
 
             {/* Size Selection */}
             {product.sizes && product.sizes.length > 1 && (
-              <div className="mb-8">
-                <h3 className="text-lg font-bold text-white mb-4">Size</h3>
-                <div className="grid grid-cols-4 gap-3">
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Size</h3>
+                <div className="grid grid-cols-4 gap-2 sm:gap-3">
                   {product.sizes.map((size) => (
                     <button
                       key={size}
@@ -287,7 +287,7 @@ export default function ProductDetail() {
                         setSelectedSize(size);
                         setError('');
                       }}
-                      className={`py-3 px-4 text-center font-bold transition-all duration-300 ${
+                      className={`py-2 sm:py-3 px-2 sm:px-4 text-center font-bold transition-all duration-300 text-sm sm:text-base ${
                         selectedSize === size
                           ? 'bg-white text-black'
                           : 'bg-gray-900 text-white border border-gray-700 hover:border-gray-500'
@@ -303,21 +303,21 @@ export default function ProductDetail() {
             )}
 
             {/* Quantity */}
-            <div className="mb-8">
-              <h3 className="text-lg font-bold text-white mb-4">Quantity</h3>
+            <div className="mb-6 sm:mb-8">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Quantity</h3>
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-12 h-12 bg-gray-900 border border-gray-700 text-white font-bold hover:border-gray-500 transition-colors duration-300"
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-900 border border-gray-700 text-white font-bold hover:border-gray-500 transition-colors duration-300 text-sm sm:text-base"
                 >
                   -
                 </button>
-                <span className="text-xl font-bold text-white w-12 text-center">
+                <span className="text-lg sm:text-xl font-bold text-white w-10 sm:w-12 text-center">
                   {quantity}
                 </span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-12 h-12 bg-gray-900 border border-gray-700 text-white font-bold hover:border-gray-500 transition-colors duration-300"
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-900 border border-gray-700 text-white font-bold hover:border-gray-500 transition-colors duration-300 text-sm sm:text-base"
                 >
                   +
                 </button>
@@ -325,43 +325,43 @@ export default function ProductDetail() {
             </div>
 
             {/* Action Buttons */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               <button
                 onClick={handleBuyNow}
-                className="w-full bg-white text-black py-4 font-bold text-lg tracking-wide hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+                className="w-full bg-white text-black py-3 sm:py-4 font-bold text-base sm:text-lg tracking-wide hover:bg-gray-100 transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
               >
                 BUY NOW
               </button>
               
               <button
                 onClick={handleAddToCart}
-                className="w-full border-2 border-white text-white py-4 font-bold text-lg tracking-wide hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
+                className="w-full border-2 border-white text-white py-3 sm:py-4 font-bold text-base sm:text-lg tracking-wide hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
               >
                 ADD TO CART
               </button>
             </div>
 
             {/* Additional Actions */}
-            <div className="flex items-center gap-6 mb-8">
+            <div className="flex items-center gap-4 sm:gap-6 mb-6 sm:mb-8">
               <button
                 onClick={() => setIsWishlisted(!isWishlisted)}
                 className={`flex items-center gap-2 text-sm transition-colors duration-300 ${
                   isWishlisted ? 'text-red-400' : 'text-gray-400 hover:text-white'
                 }`}
               >
-                <HeartIcon className="h-5 w-5" />
+                <HeartIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                 {isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
               </button>
               
               <button className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors duration-300">
-                <ShareIcon className="h-5 w-5" />
+                <ShareIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                 Share
               </button>
             </div>
 
             {/* Delivery Info */}
-            <div className="bg-gray-900 border border-gray-800 p-6">
-              <h3 className="text-lg font-bold text-white mb-4">Delivery Information</h3>
+            <div className="bg-gray-900 border border-gray-800 p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Delivery Information</h3>
               <div className="space-y-2 text-sm text-gray-300">
                 <p>🚚 Free delivery on orders above ₹999</p>
                 <p>⚡ Express delivery available</p>

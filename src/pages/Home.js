@@ -91,7 +91,7 @@ export default function Home() {
   return (
     <div className="bg-black text-white overflow-hidden">
       {/* Hero Carousel Section */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-screen sm:h-[70vh] md:h-screen overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -106,14 +106,14 @@ export default function Home() {
               <img
                 src={heroSlides[currentSlide].image}
                 alt={heroSlides[currentSlide].title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30" />
             </div>
 
             {/* Content */}
             <div className="relative z-10 h-full flex items-center">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
                 <div className="max-w-4xl">
                   <motion.div
                     initial={{ y: 50, opacity: 0 }}
@@ -126,7 +126,7 @@ export default function Home() {
                         initial={{ y: 30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-7xl md:text-9xl font-black tracking-tighter leading-none text-white font-display"
+                        className="text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-black tracking-tighter leading-none text-white font-display"
                       >
                         {heroSlides[currentSlide].title}
                       </motion.h1>
@@ -134,7 +134,7 @@ export default function Home() {
                         initial={{ y: 30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="text-2xl md:text-4xl font-light text-gray-300 tracking-wide mt-4"
+                        className="text-sm sm:text-lg md:text-2xl lg:text-4xl font-light text-gray-300 tracking-wide mt-2 sm:mt-4 leading-relaxed"
                       >
                         {heroSlides[currentSlide].subtitle}
                       </motion.h2>
@@ -144,7 +144,7 @@ export default function Home() {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.8, delay: 0.8 }}
-                      className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed font-light"
+                      className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed font-light"
                     >
                       {heroSlides[currentSlide].description}
                     </motion.p>
@@ -156,10 +156,10 @@ export default function Home() {
                     >
                       <Link
                         to={heroSlides[currentSlide].ctaLink}
-                        className="inline-flex items-center bg-accent text-white px-12 py-4 font-bold text-lg tracking-wide hover:bg-accent-600 transition-all duration-300 transform hover:scale-105 shadow-glow rounded-xl"
+                        className="inline-flex items-center bg-accent text-white px-6 sm:px-8 lg:px-12 py-3 sm:py-4 font-bold text-sm sm:text-base lg:text-lg tracking-wide hover:bg-accent-600 transition-all duration-300 transform hover:scale-105 shadow-glow rounded-xl"
                       >
                         {heroSlides[currentSlide].cta}
-                        <PlayIcon className="ml-3 h-5 w-5" />
+                        <PlayIcon className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
                       </Link>
                     </motion.div>
                   </motion.div>
@@ -172,25 +172,25 @@ export default function Home() {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-8 top-1/2 transform -translate-y-1/2 z-20 p-4 glass-dark hover:bg-white/20 transition-colors duration-200 rounded-full"
+          className="absolute left-2 sm:left-4 lg:left-8 top-1/2 transform -translate-y-1/2 z-20 p-2 sm:p-3 lg:p-4 glass-dark hover:bg-white/20 transition-colors duration-200 rounded-full"
         >
-          <ChevronLeftIcon className="h-6 w-6" />
+          <ChevronLeftIcon className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
         </button>
 
         <button
           onClick={nextSlide}
-          className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 p-4 glass-dark hover:bg-white/20 transition-colors duration-200 rounded-full"
+          className="absolute right-2 sm:right-4 lg:right-8 top-1/2 transform -translate-y-1/2 z-20 p-2 sm:p-3 lg:p-4 glass-dark hover:bg-white/20 transition-colors duration-200 rounded-full"
         >
-          <ChevronRightIcon className="h-6 w-6" />
+          <ChevronRightIcon className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
         </button>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+        <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2 sm:gap-3">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                 index === currentSlide 
                   ? 'bg-accent scale-125 shadow-glow' 
                   : 'bg-white/50 hover:bg-white/70'
@@ -200,10 +200,10 @@ export default function Home() {
         </div>
 
         {/* Auto-play indicator */}
-        <div className="absolute bottom-8 right-8 z-20">
+        <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 right-2 sm:right-4 lg:right-8 z-20">
           <button
             onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className={`px-4 py-2 text-sm font-bold transition-colors duration-200 rounded-lg glass-dark ${
+            className={`px-2 sm:px-3 lg:px-4 py-1 sm:py-2 text-xs sm:text-sm font-bold transition-colors duration-200 rounded-lg glass-dark ${
               isAutoPlaying 
                 ? 'text-accent' 
                 : 'text-gray-400'
@@ -215,36 +215,36 @@ export default function Home() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-24 bg-gray-950 relative">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gray-950 relative">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-hero-pattern opacity-20" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-8 sm:mb-12 lg:mb-20"
           >
-            <div className="inline-block mb-6">
-              <span className="text-sm font-bold tracking-[0.3em] text-accent uppercase">
+            <div className="inline-block mb-3 sm:mb-4 lg:mb-6">
+              <span className="text-xs sm:text-sm font-bold tracking-[0.3em] text-accent uppercase">
                 Premium Collection
               </span>
             </div>
-            <h2 className="text-6xl md:text-8xl font-black mb-6 tracking-tight font-display">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black mb-3 sm:mb-4 lg:mb-6 tracking-tight font-display">
               FEATURED
               <span className="block gradient-text">
                 PRODUCTS
               </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light">
+            <p className="text-sm sm:text-base lg:text-xl text-gray-400 max-w-2xl mx-auto font-light">
               Engineered for excellence. Designed for champions. Discover our most coveted pieces.
             </p>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
@@ -261,52 +261,52 @@ export default function Home() {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   
-                  {/* Badge */}
+                    <div className="absolute top-2 sm:top-3 lg:top-4 right-2 sm:right-3 lg:right-4 bg-green-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold">
                   <div className="absolute top-4 left-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
-                    {product.badge}
+                    <div className="absolute top-2 sm:top-3 lg:top-4 left-2 sm:left-3 lg:left-4 bg-accent text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold">
                   </div>
 
                   {/* Quick Actions Overlay */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/40">
-                    <div className="flex gap-3">
+                    <div className="flex gap-2 sm:gap-3">
                       <Link
                         to={`/product/${product.id}`}
-                        className="bg-white text-black px-6 py-3 font-bold hover:bg-gray-100 transition-colors duration-200 rounded-xl"
+                        className="bg-white text-black px-3 sm:px-4 lg:px-6 py-2 sm:py-3 font-bold hover:bg-gray-100 transition-colors duration-200 rounded-xl text-xs sm:text-sm"
                       >
                         BUY
                       </Link>
-                      <button className="bg-accent text-white px-6 py-3 font-bold hover:bg-accent-600 transition-colors duration-200 rounded-xl">
+                      <button className="bg-accent text-white px-3 sm:px-4 lg:px-6 py-2 sm:py-3 font-bold hover:bg-accent-600 transition-colors duration-200 rounded-xl text-xs sm:text-sm">
                         ADD TO CART
                       </button>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <div className="text-xs text-accent uppercase tracking-wider font-bold mb-2">
+                <div className="p-3 sm:p-4 lg:p-6">
+                  <div className="text-xs text-accent uppercase tracking-wider font-bold mb-1 sm:mb-2">
                     {product.category}
                   </div>
                   
-                  <h3 className="text-xl font-bold group-hover:text-accent transition-colors duration-300 leading-tight mb-3">
+                  <h3 className="text-sm sm:text-base lg:text-xl font-bold group-hover:text-accent transition-colors duration-300 leading-tight mb-2 sm:mb-3 line-clamp-2">
                     {product.name}
                   </h3>
                   
-                  <p className="text-gray-400 leading-relaxed mb-4 text-sm">
+                  <p className="text-gray-400 leading-relaxed mb-3 sm:mb-4 text-xs sm:text-sm line-clamp-2">
                     {product.description}
                   </p>
 
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl font-black text-white">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="text-lg sm:text-xl lg:text-2xl font-black text-white">
                         ₹{product.price.toLocaleString()}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-sm text-gray-500 line-through">
+                        <span className="text-xs sm:text-sm text-gray-500 line-through">
                           ₹{product.originalPrice.toLocaleString()}
                         </span>
                       )}
@@ -327,11 +327,11 @@ export default function Home() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mt-20"
+            className="text-center mt-8 sm:mt-12 lg:mt-20"
           >
             <Link
               to="/products"
-              className="inline-block bg-gradient-to-r from-accent to-accent-600 text-white px-12 py-4 font-bold text-lg tracking-wide hover:from-accent-600 hover:to-accent-700 transition-all duration-300 transform hover:scale-105 shadow-glow rounded-xl"
+              className="inline-block bg-gradient-to-r from-accent to-accent-600 text-white px-6 sm:px-8 lg:px-12 py-3 sm:py-4 font-bold text-sm sm:text-base lg:text-lg tracking-wide hover:from-accent-600 hover:to-accent-700 transition-all duration-300 transform hover:scale-105 shadow-glow rounded-xl"
             >
               VIEW ALL PRODUCTS
             </Link>
@@ -340,16 +340,16 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-24 bg-black relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 lg:py-24 bg-black relative">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-8 sm:mb-12 lg:mb-20"
           >
-            <h2 className="text-6xl md:text-8xl font-black mb-6 tracking-tight font-display">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black mb-3 sm:mb-4 lg:mb-6 tracking-tight font-display">
               SHOP BY
               <span className="block gradient-text">
                 CATEGORY
@@ -357,7 +357,7 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {[
               {
                 name: "Men's Collection",
@@ -384,7 +384,7 @@ export default function Home() {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden card-premium h-96"
+                className="group relative overflow-hidden card-premium h-64 sm:h-80 lg:h-96"
               >
                 <Link to={category.href} className="block h-full">
                   <div className="absolute inset-0">
@@ -397,17 +397,17 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                   </div>
 
-                  <div className="relative z-10 h-full flex items-end p-8">
+                  <div className="relative z-10 h-full flex items-end p-4 sm:p-6 lg:p-8">
                     <div>
-                      <h3 className="text-3xl font-black text-white group-hover:text-accent transition-colors duration-300 mb-2">
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white group-hover:text-accent transition-colors duration-300 mb-1 sm:mb-2">
                         {category.name}
                       </h3>
-                      <p className="text-gray-300 mb-4">
+                      <p className="text-gray-300 mb-2 sm:mb-3 lg:mb-4 text-sm sm:text-base">
                         {category.description}
                       </p>
                       <div className="flex items-center text-accent group-hover:text-white transition-colors duration-300">
-                        <span className="font-bold">EXPLORE</span>
-                        <ChevronRightIcon className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" />
+                        <span className="font-bold text-sm sm:text-base">EXPLORE</span>
+                        <ChevronRightIcon className="ml-1 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5 transform group-hover:translate-x-1 transition-transform duration-300" />
                       </div>
                     </div>
                   </div>
@@ -419,32 +419,32 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-accent/20 via-black to-black relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-accent/20 via-black to-black relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-accent/20 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-20 sm:w-32 lg:w-40 h-20 sm:h-32 lg:h-40 bg-blue-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
         </div>
 
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-4xl mx-auto text-center px-3 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-7xl font-black mb-6 font-display">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 font-display">
               READY TO ELEVATE
               <span className="block gradient-text">
                 YOUR GAME?
               </span>
             </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto font-light">
+            <p className="text-sm sm:text-base lg:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto font-light">
               Join thousands of athletes who trust our premium gear to push their limits and achieve greatness.
             </p>
             <Link
               to="/products"
-              className="inline-block bg-gradient-to-r from-accent to-accent-600 text-white px-12 py-4 text-xl font-bold tracking-wide hover:from-accent-600 hover:to-accent-700 transition-all duration-300 transform hover:scale-105 shadow-glow-lg rounded-xl"
+              className="inline-block bg-gradient-to-r from-accent to-accent-600 text-white px-6 sm:px-8 lg:px-12 py-3 sm:py-4 text-sm sm:text-base lg:text-xl font-bold tracking-wide hover:from-accent-600 hover:to-accent-700 transition-all duration-300 transform hover:scale-105 shadow-glow-lg rounded-xl"
             >
               SHOP ALL PRODUCTS
             </Link>

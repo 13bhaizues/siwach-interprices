@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 import {
   HeartIcon,
@@ -20,6 +21,7 @@ import ProductBadge from './ProductBadge';
 
 export default function ProductCard({ product, index = 0, className = '' }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -84,7 +86,7 @@ export default function ProductCard({ product, index = 0, className = '' }) {
     e.preventDefault();
     e.stopPropagation();
     handleAddToCart(e); // add first
-    window.location.href = '/checkout';
+    navigate(`/checkout?sku=${product.id}`);
   };
 
   const handleWishlistToggle = (e) => {
@@ -139,25 +141,25 @@ export default function ProductCard({ product, index = 0, className = '' }) {
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
 
           {/* Quick actions */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/40">
             <div className="flex gap-3">
               <motion.button
                 onClick={handleBuyNow}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-black p-3 font-bold hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2"
+                className="bg-white text-black p-2 sm:p-3 font-bold hover:bg-gray-100 transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-cyan-500/30 transform hover:scale-103"
               >
-                <EyeIcon className="h-4 w-4" />
-                <span className="hidden sm:inline">BUY</span>
+                <EyeIcon className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm">BUY</span>
               </motion.button>
               <motion.button
                 onClick={handleAddToCart}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white p-3 font-bold hover:bg-white hover:text-black transition-colors duration-200 flex items-center gap-2"
+                className="bg-transparent border-2 border-white text-white p-2 sm:p-3 font-bold hover:bg-white hover:text-black transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-cyan-500/30 transform hover:scale-103"
               >
-                <ShoppingBagIcon className="h-4 w-4" />
-                <span className="hidden sm:inline">ADD</span>
+                <ShoppingBagIcon className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm">ADD</span>
               </motion.button>
             </div>
           </div>
@@ -213,13 +215,13 @@ export default function ProductCard({ product, index = 0, className = '' }) {
           <div className="flex gap-2 pt-4">
             <button
               onClick={handleBuyNow}
-              className="flex-1 bg-white text-black py-2 px-4 font-bold text-sm hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+              className="flex-1 bg-white text-black py-2 px-3 sm:px-4 font-bold text-xs sm:text-sm hover:bg-gray-100 transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
             >
-              BUY
+              BUY NOW
             </button>
             <button
               onClick={handleAddToCart}
-              className="flex-1 border-2 border-white text-white py-2 px-4 font-bold text-sm hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
+              className="flex-1 border-2 border-white text-white py-2 px-3 sm:px-4 font-bold text-xs sm:text-sm hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
             >
               ADD TO CART
             </button>
