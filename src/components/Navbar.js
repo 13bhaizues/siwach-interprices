@@ -1,14 +1,29 @@
+// ──────────────────────────────────────────────────────────
+//  Navbar.js   (src/components/Navbar.js)
+// ──────────────────────────────────────────────────────────
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { ShoppingBagIcon, UserIcon, Bars3Icon, XMarkIcon, MagnifyingGlassIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { logout } from '../store/authSlice';
+import {
+  ShoppingBagIcon,
+  UserIcon,
+  Bars3Icon,
+  XMarkIcon,
+  MagnifyingGlassIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
+import { logout } from '../store/authSlice';
+
 import CartDrawer from './CartDrawer';
 import MegaMenu from './MegaMenu';
 import SearchBar from './SearchBar';
-import { useNavigationHistory } from '../hooks/useNavigationHistory';
+
+// 👉  default‑import so braces aren’t required
+//    (adjust path to ../../hooks/... if Navbar is nested deeper)
+import useNavigationHistory from '../hooks/useNavigationHistory';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -19,92 +34,86 @@ const navigation = [
 ];
 
 export default function Navbar() {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const cartItems = useSelector((state) => state.cart.totalQuantity);
-  const { isAuthenticated } = useSelector((state) => state.auth);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState(null);
+  const dispatch          = useDispatch();
+  const location          = useLocation();
+  const cartItems         = useSelector((s) => s.cart.totalQuantity);
+  const { isAuthenticated } = useSelector((s) => s.auth);
+
+  const [isScrolled,   setIsScrolled]   = useState(false);
+  const [isCartOpen,   setIsCartOpen]   = useState(false);
+  const [activeMenu,   setActiveMenu]   = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   const { canGoBack, canGoForward, goBack, goForward } = useNavigationHistory();
 
+  /* ── Scroll shadow / blur ── */
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
+  /* ── Helpers ── */
+  const handleLogout = () => dispatch(logout());
 
   const isActive = (href) => {
-    if (href === '/') {
-      return location.pathname === '/';
-    }
+    if (href === '/') return location.pathname === '/';
     return location.pathname.startsWith(href) || location.search.includes(href.split('?')[1]);
   };
 
-  const handleMenuHover = (menuName) => {
-    setActiveMenu(menuName);
-  };
+  const handleMenuHover = (m) => setActiveMenu(m);
+  const handleMenuLeave = () => setActiveMenu(null);
 
-  const handleMenuLeave = () => {
-    setActiveMenu(null);
-  };
-
+  /* ─────────────────────────────────────────────────────── */
   return (
     <>
-      <Disclosure as="nav" className={`fixed w-full z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-black/95 backdrop-blur-md shadow-2xl border-b border-gray-800' 
-          : 'bg-transparent'
-      }`}>
+      <Disclosure
+        as="nav"
+        className={`fixed w-full z-50 transition-all duration-500 ${
+          isScrolled
+            ? 'bg-black/95 backdrop-blur-md shadow-2xl border-b border-gray-800'
+            : 'bg-transparent'
+        }`}
+      >
         {({ open }) => (
           <>
+            {/* Top bar */}
             <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
               <div className="flex justify-between h-12 sm:h-16 items-center">
-                {/* Navigation History Buttons */}
+
+                {/* ◀ ▶ History buttons */}
                 <div className="hidden sm:flex items-center gap-1 mr-4">
-                  <div className="group relative">
-                    <button
-                      onClick={goBack}
-                      disabled={!canGoBack}
-                      className={`p-2 rounded-lg transition-all duration-300 ${
-                        canGoBack 
-                          ? 'text-white hover:bg-white/10 hover:backdrop-blur-sm' 
-                          : 'text-gray-600 opacity-50 cursor-not-allowed'
-                      }`}
-                      title="Back (Alt + ←)"
-                    >
-                      <ChevronLeftIcon className="h-5 w-5" />
-                    </button>
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      Back
-                    </div>
-                  </div>
-                  
-                  <div className="group relative">
-                    <button
-                      onClick={goForward}
-                      disabled={!canGoForward}
-                      className={`p-2 rounded-lg transition-all duration-300 ${
-                        canGoForward 
-                          ? 'text-white hover:bg-white/10 hover:backdrop-blur-sm' 
-                          : 'text-gray-600 opacity-50 cursor-not-allowed'
-                      }`}
-                      title="Forward (Alt + →)"
-                    >
-                      <ChevronRightIcon className="h-5 w-5" />
-                    </button>
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      Forward
-                    </div>
-                  </div>
+                  {/* Back */}
+                  <button
+                    onClick={goBack}
+                    disabled={!canGoBack}
+                    className={`group p-2 rounded-lg transition-all duration-300 ${
+                      canGoBack
+                        ? 'text-white hover:bg-white/10 hover:backdrop-blur-sm'
+                        : 'text-gray-600 opacity-50 cursor-not-allowed'
+                    }`}
+                    title="Back (Alt + ←)"
+                  >
+                    <ChevronLeftIcon className="h-5 w-5" />
+                    <span className="sr-only">Back</span>
+                  </button>
+
+                  {/* Forward */}
+                  <button
+                    onClick={goForward}
+                    disabled={!canGoForward}
+                    className={`group p-2 rounded-lg transition-all duration-300 ${
+                      canGoForward
+                        ? 'text-white hover:bg-white/10 hover:backdrop-blur-sm'
+                        : 'text-gray-600 opacity-50 cursor-not-allowed'
+                    }`}
+                    title="Forward (Alt + →)"
+                  >
+                    <ChevronRightIcon className="h-5 w-5" />
+                    <span className="sr-only">Forward</span>
+                  </button>
                 </div>
+
                 {/* Logo */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -119,74 +128,68 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
 
-                {/* Desktop Navigation */}
+                {/* Desktop nav links */}
                 <div className="hidden lg:flex lg:space-x-8">
-                  {navigation.map((item, index) => (
+                  {navigation.map((item, i) => (
                     <motion.div
                       key={item.name}
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
                       onMouseEnter={() => item.name !== 'Home' && handleMenuHover(item.name.toLowerCase())}
                       onMouseLeave={handleMenuLeave}
                     >
                       <Link
                         to={item.href}
                         className={`px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium uppercase tracking-wider transition-all duration-300 relative group ${
-                          isActive(item.href)
-                            ? 'text-blue-400'
-                            : 'text-white hover:text-blue-400'
+                          isActive(item.href) ? 'text-blue-400' : 'text-white hover:text-blue-400'
                         }`}
                       >
                         {item.name}
-                        <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-400 transition-all duration-300 ${
-                          isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'
-                        }`} />
+                        <span
+                          className={`absolute bottom-0 left-0 h-0.5 bg-blue-400 transition-all duration-300 ${
+                            isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'
+                          }`}
+                        />
                       </Link>
                     </motion.div>
                   ))}
                 </div>
 
-                {/* Right Side Icons */}
+                {/* Right‑side icons */}
                 <div className="hidden sm:flex sm:items-center sm:space-x-2 lg:space-x-4">
                   {/* Search */}
-                  <motion.div
+                  <motion.button
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
+                    onClick={() => setIsSearchOpen(true)}
+                    className="p-1.5 sm:p-2 text-white hover:text-blue-400 transition-all duration-300 transform hover:scale-110"
                   >
-                    <button 
-                      onClick={() => setIsSearchOpen(true)}
-                      className="p-1.5 sm:p-2 text-white hover:text-blue-400 transition-all duration-300 transform hover:scale-110"
-                    >
-                      <MagnifyingGlassIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-                    </button>
-                  </motion.div>
+                    <MagnifyingGlassIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </motion.button>
 
                   {/* Cart */}
-                  <motion.div
+                  <motion.button
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.6 }}
+                    onClick={() => setIsCartOpen(true)}
+                    className="relative p-1.5 sm:p-2 text-white hover:text-blue-400 transition-all duration-300 transform hover:scale-110 group"
                   >
-                    <button 
-                      onClick={() => setIsCartOpen(true)}
-                      className="relative p-1.5 sm:p-2 text-white hover:text-blue-400 transition-all duration-300 transform hover:scale-110 group"
-                    >
-                      <ShoppingBagIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-                      {cartItems > 0 && (
-                        <motion.span
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-black bg-blue-400 rounded-full group-hover:bg-white transition-colors duration-300"
-                        >
-                          {cartItems}
-                        </motion.span>
-                      )}
-                    </button>
-                  </motion.div>
+                    <ShoppingBagIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+                    {cartItems > 0 && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-black bg-blue-400 rounded-full group-hover:bg-white transition-colors duration-300"
+                      >
+                        {cartItems}
+                      </motion.span>
+                    )}
+                  </motion.button>
 
-                  {/* User Menu */}
+                  {/* User / auth */}
                   {isAuthenticated ? (
                     <Menu as="div" className="relative">
                       <Menu.Button className="bg-transparent rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 p-1.5 sm:p-2 hover:bg-white/10 transition-colors duration-300">
@@ -212,7 +215,7 @@ export default function Navbar() {
                           </Menu.Item>
                           <Menu.Item>
                             <button
-                              onClick={handleLogout}
+                              onClick={() => dispatch(logout())}
                               className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-800 transition-colors duration-200"
                             >
                               Sign out
@@ -237,10 +240,10 @@ export default function Navbar() {
                   )}
                 </div>
 
-                {/* Mobile menu button */}
+                {/* Mobile buttons */}
                 <div className="sm:hidden flex items-center space-x-2">
-                  {/* Mobile Cart */}
-                  <button 
+                  {/* Mobile cart */}
+                  <button
                     onClick={() => setIsCartOpen(true)}
                     className="relative p-1.5 text-white hover:text-blue-400 transition-colors duration-300"
                   >
@@ -252,6 +255,7 @@ export default function Navbar() {
                     )}
                   </button>
 
+                  {/* Hamburger */}
                   <Disclosure.Button className="inline-flex items-center justify-center p-1.5 rounded-md text-white hover:text-blue-400 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors duration-300">
                     {open ? (
                       <XMarkIcon className="block h-5 w-5" aria-hidden="true" />
@@ -263,7 +267,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Mobile Navigation */}
+            {/* Mobile nav links */}
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 bg-black/95 backdrop-blur-md border-t border-gray-800">
                 {navigation.map((item) => (
@@ -279,30 +283,26 @@ export default function Navbar() {
                     {item.name}
                   </Link>
                 ))}
-                <div className="border-t border-gray-800 pt-4 mt-4">
-                  {!isAuthenticated && (
+                {!isAuthenticated && (
+                  <div className="border-t border-gray-800 pt-4 mt-4">
                     <Link
                       to="/login"
                       className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium transition-colors duration-300"
                     >
                       Sign In
                     </Link>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </Disclosure.Panel>
           </>
         )}
       </Disclosure>
 
-      {/* Mega Menu */}
-      <MegaMenu activeMenu={activeMenu} onClose={handleMenuLeave} />
-
-      {/* Cart Drawer */}
+      {/* Other overlays */}
+      <MegaMenu  activeMenu={activeMenu} onClose={handleMenuLeave} />
       <CartDrawer isOpen={isCartOpen} setIsOpen={setIsCartOpen} />
-
-      {/* Search Bar */}
-      <SearchBar isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <SearchBar  isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   );
 }
