@@ -81,15 +81,15 @@ export const getProductsByBadge = (badge) => {
 };
 
 export const getBestsellerProducts = () => {
-  return allProducts.filter(product => product.badge?.includes('Bestseller') || product.badge?.includes('🔥'));
+  return allProducts.filter(product => product.badge?.includes('BESTSELLER'));
 };
 
 export const getNewProducts = () => {
-  return allProducts.filter(product => product.badge?.includes('New') || product.badge?.includes('🆕'));
+  return allProducts.filter(product => product.badge?.includes('NEW'));
 };
 
 export const getPremiumProducts = () => {
-  return allProducts.filter(product => product.badge?.includes('Premium') || product.badge?.includes('💎'));
+  return allProducts.filter(product => product.badge?.includes('PREMIUM'));
 };
 
 export const getTechProducts = () => {
@@ -147,5 +147,3 @@ export const getProductStats = () => {
     categories: [...new Set(allProducts.map(p => p.category))].length
   };
 };
-
-console.log('Product Stats:', getProductStats());

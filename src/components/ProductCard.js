@@ -27,7 +27,7 @@ export default function ProductCard({ product, index = 0, className = '' }) {
 
   /* ---------- Image fallback ---------- */
   // Uses imageSrc → image → placeholder (in that order)
-  const imgSrc = product.imageSrc || product.image || '/placeholder.png';
+  const imgSrc = product.imageSrc || product.image || 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop';
 
   /* ---------- Helpers ---------- */
   const safeSize = product.sizes?.[0] || 'default';
@@ -108,7 +108,9 @@ export default function ProductCard({ product, index = 0, className = '' }) {
         <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
           {product.badge && <ProductBadge badge={product.badge} />}
           {discountPercentage > 0 && (
-            <ProductBadge badge="SALE" className="bg-red-600 text-white" />
+            <div className="bg-red-600 text-white px-2 py-1 text-xs font-bold rounded">
+              -{discountPercentage}%
+            </div>
           )}
         </div>
 
@@ -209,7 +211,7 @@ export default function ProductCard({ product, index = 0, className = '' }) {
             >
               {product.inStock ? '✅ In Stock' : '❌ Out of Stock'}
             </span>
-            <span className="text-xs text-gray-400">🚚 2‑3 days</span>
+            <span className="text-xs text-gray-400">🚚 2‑3 days</span>
           </div>
 
           <div className="flex gap-2 pt-4">
@@ -223,7 +225,7 @@ export default function ProductCard({ product, index = 0, className = '' }) {
               onClick={handleAddToCart}
               className="flex-1 border-2 border-white text-white py-2 px-3 sm:px-4 font-bold text-xs sm:text-sm hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
             >
-              ADD TO CART
+              ADD TO CART
             </button>
           </div>
         </div>

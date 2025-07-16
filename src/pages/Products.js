@@ -1,4 +1,3 @@
-import { getMenProducts, getWomenProducts } from '../data/products';
 import React, { useState, Fragment } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -9,7 +8,8 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 import { 
   getProductsByCategory, 
- 
+  getMenProducts,
+  getWomenProducts,
   allProducts 
 } from '../data/allProducts';
 
@@ -157,7 +157,7 @@ export default function Products() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20">
+    <div className="min-h-screen bg-black text-white pt-12 sm:pt-16 lg:pt-20">
       {/* Mobile filter dialog */}
       <Transition.Root show={mobileFiltersOpen} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
@@ -244,19 +244,19 @@ export default function Products() {
         </Dialog>
       </Transition.Root>
 
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <motion.div
-          className="flex items-baseline justify-between border-b border-gray-800 pb-6 pt-8"
+          className="flex items-baseline justify-between border-b border-gray-800 pb-4 sm:pb-6 pt-4 sm:pt-8"
           {...fadeInUp}
         >
           <div>
-            <h1 className="text-5xl md:text-6xl font-black tracking-tight text-white mb-4 font-display">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-2 sm:mb-4 font-display">
               {getCategoryTitle().split(' ')[0]}
               <span className="block gradient-text">
                 {getCategoryTitle().split(' ').slice(1).join(' ')}
               </span>
             </h1>
-            <p className="text-gray-400 font-light">
+            <p className="text-gray-400 font-light text-sm sm:text-base">
               {sortedProducts.length} products available
             </p>
           </div>
@@ -316,7 +316,7 @@ export default function Products() {
           </div>
         </motion.div>
 
-        <section aria-labelledby="products-heading" className="pb-24 pt-6">
+        <section aria-labelledby="products-heading" className="pb-16 sm:pb-24 pt-4 sm:pt-6">
           <h2 id="products-heading" className="sr-only">
             Products
           </h2>
@@ -370,7 +370,7 @@ export default function Products() {
             {/* Product grid */}
             <div className="lg:col-span-3">
               <motion.div
-                className="grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-4 sm:gap-y-6 lg:gap-x-6 lg:gap-y-8 xl:gap-x-8"
+                className="grid grid-cols-1 gap-x-2 gap-y-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-3 sm:gap-y-4 lg:gap-x-4 lg:gap-y-6 xl:gap-x-6 xl:gap-y-8"
                 variants={staggerContainer}
                 initial="initial"
                 whileInView="animate"
@@ -388,7 +388,7 @@ export default function Products() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="h-40 sm:h-48 lg:h-64 xl:h-80 w-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                        className="h-32 sm:h-40 lg:h-48 xl:h-64 w-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
                         loading="lazy"
                       />
                       
@@ -409,50 +409,50 @@ export default function Products() {
                       {/* Quick Actions */}
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                         <div className="flex gap-2 sm:gap-3">
-                          <button className="p-3 bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors duration-200 rounded-xl">
-                            <EyeIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                          <button className="p-2 sm:p-3 bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors duration-200 rounded-xl">
+                            <EyeIcon className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
                           </button>
-                          <button className="p-3 bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors duration-200 rounded-xl">
-                            <HeartIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                          <button className="p-2 sm:p-3 bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors duration-200 rounded-xl">
+                            <HeartIcon className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
                           </button>
                           <button
                             onClick={() => handleAddToCart(product)}
-                            className="p-3 bg-accent text-white hover:bg-accent-600 transition-colors duration-200 rounded-xl"
+                            className="p-2 sm:p-3 bg-accent text-white hover:bg-accent-600 transition-colors duration-200 rounded-xl"
                           >
-                            <ShoppingBagIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                            <ShoppingBagIcon className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
                           </button>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="p-3 sm:p-4 lg:p-6">
-                      <div className="flex items-center justify-between mb-2">
+                    <div className="p-2 sm:p-3 lg:p-4 xl:p-6">
+                      <div className="flex items-center justify-between mb-1 sm:mb-2">
                         <div className="text-xs text-accent uppercase tracking-wider font-bold">
                           {product.category}
                         </div>
                         {product.reviews?.length > 0 && (
                           <div className="flex items-center">
                             <StarIcon className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400" />
-                            <span className="text-sm text-gray-400 ml-1">
+                            <span className="text-xs sm:text-sm text-gray-400 ml-1">
                               {(product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length).toFixed(1)}
                             </span>
                           </div>
                         )}
                       </div>
                       
-                      <h3 className="text-xs sm:text-sm lg:text-base xl:text-lg font-bold text-white group-hover:text-accent transition-colors duration-300 leading-tight mb-2 sm:mb-3 line-clamp-2">
+                      <h3 className="text-xs sm:text-sm lg:text-base xl:text-lg font-bold text-white group-hover:text-accent transition-colors duration-300 leading-tight mb-1 sm:mb-2 lg:mb-3 line-clamp-2">
                         <Link to={`/product/${product.id}`}>
                           {product.name}
                         </Link>
                       </h3>
                       
-                      <p className="text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed">
+                      <p className="text-gray-400 text-xs sm:text-sm mb-2 sm:mb-3 lg:mb-4 line-clamp-2 leading-relaxed">
                         {product.description}
                       </p>
                       
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-black text-white">
+                      <div className="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
+                        <div className="flex items-center gap-1 sm:gap-2 lg:gap-3">
+                          <span className="text-sm sm:text-base lg:text-lg xl:text-xl font-black text-white">
                             ₹{product.price.toLocaleString()}
                           </span>
                           {product.originalPrice && (
@@ -470,16 +470,16 @@ export default function Products() {
                       </div>
                       
                       {/* Mobile CTA Buttons */}
-                      <div className="flex flex-col sm:flex-row gap-2 mt-4">
+                      <div className="flex flex-col sm:flex-row gap-1 sm:gap-2">
                         <button
                           onClick={() => handleAddToCart(product)}
-                          className="flex-1 bg-transparent border-2 border-white text-white py-2 px-2 sm:px-3 font-bold text-xs hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
+                          className="flex-1 bg-transparent border-2 border-white text-white py-1.5 sm:py-2 px-2 sm:px-3 font-bold text-xs hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
                         >
                           ADD TO CART
                         </button>
                         <Link
                           to={`/checkout?sku=${product.id}`}
-                          className="flex-1 bg-white text-black py-2 px-2 sm:px-3 font-bold text-xs hover:bg-gray-100 transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30 text-center"
+                          className="flex-1 bg-white text-black py-1.5 sm:py-2 px-2 sm:px-3 font-bold text-xs hover:bg-gray-100 transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30 text-center"
                         >
                           BUY NOW
                         </Link>
