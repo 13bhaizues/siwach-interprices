@@ -369,8 +369,8 @@ export default function Products() {
 
             {/* Product grid */}
             <div className="lg:col-span-3">
-              <motion.div 
-                className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-6 sm:gap-y-8 lg:gap-y-10 xl:gap-x-8"
+              <motion.div
+                className="grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-4 sm:gap-y-6 lg:gap-x-6 lg:gap-y-8 xl:gap-x-8"
                 variants={staggerContainer}
                 initial="initial"
                 whileInView="animate"
@@ -388,7 +388,7 @@ export default function Products() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="h-48 sm:h-64 lg:h-80 w-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                        className="h-40 sm:h-48 lg:h-64 xl:h-80 w-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
                         loading="lazy"
                       />
                       
@@ -440,7 +440,7 @@ export default function Products() {
                         )}
                       </div>
                       
-                      <h3 className="text-sm sm:text-base lg:text-lg font-bold text-white group-hover:text-accent transition-colors duration-300 leading-tight mb-2 sm:mb-3 line-clamp-2">
+                      <h3 className="text-xs sm:text-sm lg:text-base xl:text-lg font-bold text-white group-hover:text-accent transition-colors duration-300 leading-tight mb-2 sm:mb-3 line-clamp-2">
                         <Link to={`/product/${product.id}`}>
                           {product.name}
                         </Link>
@@ -452,11 +452,11 @@ export default function Products() {
                       
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 sm:gap-3">
-                          <span className="text-lg sm:text-xl lg:text-2xl font-black text-white">
+                          <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-black text-white">
                             ₹{product.price.toLocaleString()}
                           </span>
                           {product.originalPrice && (
-                            <span className="text-sm sm:text-base lg:text-lg text-gray-500 line-through">
+                            <span className="text-xs sm:text-sm lg:text-base text-gray-500 line-through">
                               ₹{product.originalPrice.toLocaleString()}
                             </span>
                           )}
@@ -473,13 +473,13 @@ export default function Products() {
                       <div className="flex flex-col sm:flex-row gap-2 mt-4">
                         <button
                           onClick={() => handleAddToCart(product)}
-                          className="flex-1 bg-transparent border-2 border-white text-white py-2 px-3 font-bold text-xs hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
+                          className="flex-1 bg-transparent border-2 border-white text-white py-2 px-2 sm:px-3 font-bold text-xs hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
                         >
                           ADD TO CART
                         </button>
                         <Link
                           to={`/checkout?sku=${product.id}`}
-                          className="flex-1 bg-white text-black py-2 px-3 font-bold text-xs hover:bg-gray-100 transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30 text-center"
+                          className="flex-1 bg-white text-black py-2 px-2 sm:px-3 font-bold text-xs hover:bg-gray-100 transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30 text-center"
                         >
                           BUY NOW
                         </Link>

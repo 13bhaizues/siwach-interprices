@@ -25,11 +25,17 @@ export default function Checkout() {
 
   // Handle direct buy from product page
   const skuParam = searchParams.get('sku');
-  const directBuyProduct = skuParam ? getProductById(skuParam) : null;
+  const directBuyProduct = skuParam ? getProductById(parseInt(skuParam)) : null;
   
   // Use either cart items or direct buy product
-  const checkoutItems = directBuyProduct ? [directBuyProduct] : items;
+  const checkoutItems = directBuyProduct ? [{
+    ...directBuyProduct,
+    quantity: 1,
+    size: directBuyProduct.sizes?.[0] || 'One Size',
+    totalPrice: directBuyProduct.price
+  }] : items;
   const checkoutTotal = directBuyProduct ? directBuyProduct.price : totalAmount;
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,

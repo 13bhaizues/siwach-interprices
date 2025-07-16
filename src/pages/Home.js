@@ -145,7 +145,7 @@ export default function Home() {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.8, delay: 0.8 }}
                       className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed font-light"
-                    >
+                    className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-300 max-w-2xl leading-relaxed font-light"
                       {heroSlides[currentSlide].description}
                     </motion.p>
 
@@ -153,11 +153,11 @@ export default function Home() {
                       initial={{ y: 30, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.8, delay: 1 }}
-                    >
+                      className="text-xs sm:text-sm md:text-lg lg:text-2xl xl:text-4xl font-light text-gray-300 tracking-wide mt-2 sm:mt-4 leading-relaxed"
                       <Link
                         to={heroSlides[currentSlide].ctaLink}
                         className="inline-flex items-center bg-accent text-white px-6 sm:px-8 lg:px-12 py-3 sm:py-4 font-bold text-sm sm:text-base lg:text-lg tracking-wide hover:bg-accent-600 transition-all duration-300 transform hover:scale-105 shadow-glow rounded-xl"
-                      >
+                      className="inline-flex items-center bg-accent text-white px-4 sm:px-6 lg:px-8 xl:px-12 py-2 sm:py-3 lg:py-4 font-bold text-xs sm:text-sm lg:text-base xl:text-lg tracking-wide hover:bg-accent-600 transition-all duration-300 transform hover:scale-105 shadow-glow rounded-xl"
                         {heroSlides[currentSlide].cta}
                         <PlayIcon className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
                       </Link>
@@ -261,7 +261,7 @@ export default function Home() {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-40 sm:h-48 lg:h-64 xl:h-80 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -276,7 +276,7 @@ export default function Home() {
                     <div className="flex gap-2 sm:gap-3">
                       <Link
                         to={`/product/${product.id}`}
-                        className="bg-white text-black px-3 sm:px-4 lg:px-6 py-2 sm:py-3 font-bold hover:bg-gray-100 transition-colors duration-200 rounded-xl text-xs sm:text-sm"
+                      className="bg-white text-black px-2 sm:px-3 lg:px-4 xl:px-6 py-1 sm:py-2 lg:py-3 font-bold hover:bg-gray-100 transition-colors duration-200 rounded-xl text-xs sm:text-sm"
                       >
                         BUY
                       </Link>
@@ -290,7 +290,7 @@ export default function Home() {
                 <div className="p-3 sm:p-4 lg:p-6">
                   <div className="text-xs text-accent uppercase tracking-wider font-bold mb-1 sm:mb-2">
                     {product.category}
-                  </div>
+                    <button className="bg-accent text-white px-2 sm:px-3 lg:px-4 xl:px-6 py-1 sm:py-2 lg:py-3 font-bold hover:bg-accent-600 transition-colors duration-200 rounded-xl text-xs sm:text-sm">
                   
                   <h3 className="text-sm sm:text-base lg:text-xl font-bold group-hover:text-accent transition-colors duration-300 leading-tight mb-2 sm:mb-3 line-clamp-2">
                     {product.name}
@@ -302,17 +302,17 @@ export default function Home() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <span className="text-lg sm:text-xl lg:text-2xl font-black text-white">
+                <h3 className="text-xs sm:text-sm lg:text-base xl:text-xl font-bold group-hover:text-accent transition-colors duration-300 leading-tight mb-2 sm:mb-3 line-clamp-2">
                         ₹{product.price.toLocaleString()}
                       </span>
                       {product.originalPrice && (
                         <span className="text-xs sm:text-sm text-gray-500 line-through">
-                          ₹{product.originalPrice.toLocaleString()}
+                      <span className="text-xs sm:text-sm lg:text-base text-gray-500 line-through">
                         </span>
                       )}
                     </div>
                     
-                    <span className="text-xs text-green-400 font-bold">
+                    <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-black text-white">
                       ✅ In Stock
                     </span>
                   </div>
@@ -384,7 +384,7 @@ export default function Home() {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden card-premium h-64 sm:h-80 lg:h-96"
+                className="group relative overflow-hidden card-premium h-48 sm:h-64 lg:h-80 xl:h-96"
               >
                 <Link to={category.href} className="block h-full">
                   <div className="absolute inset-0">
@@ -399,7 +399,7 @@ export default function Home() {
 
                   <div className="relative z-10 h-full flex items-end p-4 sm:p-6 lg:p-8">
                     <div>
-                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white group-hover:text-accent transition-colors duration-300 mb-1 sm:mb-2">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-black text-white group-hover:text-accent transition-colors duration-300 mb-1 sm:mb-2">
                         {category.name}
                       </h3>
                       <p className="text-gray-300 mb-2 sm:mb-3 lg:mb-4 text-sm sm:text-base">

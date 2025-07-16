@@ -21,8 +21,6 @@ import CartDrawer from './CartDrawer';
 import MegaMenu from './MegaMenu';
 import SearchBar from './SearchBar';
 
-// 👉  default‑import so braces aren’t required
-//    (adjust path to ../../hooks/... if Navbar is nested deeper)
 import { useNavigationHistory } from '../hooks/useNavigationHistory';
 
 const navigation = [

@@ -172,12 +172,12 @@ export default function ProductCard({ product, index = 0, className = '' }) {
         </div>
 
         {/* Info */}
-        <div className="p-6 space-y-3">
+        <div className="p-3 sm:p-4 lg:p-6 space-y-3">
           <div className="text-xs text-blue-400 uppercase tracking-wider font-bold">
             {product.category}
           </div>
 
-          <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-300 leading-tight line-clamp-2">
+          <h3 className="text-sm sm:text-base lg:text-lg font-bold group-hover:text-blue-400 transition-colors duration-300 leading-tight line-clamp-2">
             {product.name}
           </h3>
 
@@ -191,11 +191,11 @@ export default function ProductCard({ product, index = 0, className = '' }) {
           </div>
 
           <div className="flex items-center gap-3 pt-2">
-            <span className="text-xl font-black text-white">
+            <span className="text-lg sm:text-xl lg:text-2xl font-black text-white">
               ₹{product.price.toLocaleString()}
             </span>
             {product.originalPrice && (
-              <span className="text-sm text-gray-500 line-through">
+              <span className="text-xs sm:text-sm lg:text-base text-gray-500 line-through">
                 ₹{product.originalPrice.toLocaleString()}
               </span>
             )}

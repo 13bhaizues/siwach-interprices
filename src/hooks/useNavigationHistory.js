@@ -13,13 +13,13 @@ export function useNavigationHistory() {
   const navigate = useNavigate();
   const location = useLocation();          // fires on every route change
   const [canGoBack, setCanGoBack] = useState(false);
-  const [canGoForward, setCanGoForward] = useState(false); // browsers don’t expose this ☹️
+  const [canGoForward, setCanGoForward] = useState(false); // browsers don't expose this ☹️
 
   /* -------------------------------------------------------
-     Update “canGoBack / canGoForward” whenever location changes
+     Update "canGoBack / canGoForward" whenever location changes
   -------------------------------------------------------- */
   useEffect(() => {
-    // If the history stack length is > 1, we have something to go back to
+    // If the history stack length is > 1, we have something to go back to
     setCanGoBack(window.history.length > 1);
 
     /* Browsers do not give us forward‑stack length for security.
@@ -38,7 +38,7 @@ export function useNavigationHistory() {
     if (canGoForward) navigate(1);
   };
 
-  /* Alt + ← / Alt + → keyboard shortcuts */
+  /* Alt + ← / Alt + → keyboard shortcuts */
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!e.altKey) return;

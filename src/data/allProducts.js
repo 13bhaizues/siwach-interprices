@@ -2,40 +2,9 @@
 // Merging products.js and enhancedProducts.js with proper categorization
 
 import { allProducts as baseProducts } from './products';
-import { enhancedProducts } from './enhancedProducts';
 
-// Enhanced products with proper categorization mapping
-const categorizedEnhancedProducts = enhancedProducts.map(product => ({
-  ...product,
-  // Map enhanced product categories to base product structure
-  category: product.category === 'men' ? 'running' : 
-           product.category === 'women' ? 'training' : 
-           product.category === 'tech' ? 'tech' : 
-           product.category,
-  // Add gender property for filtering
-  gender: product.category === 'men' ? 'men' : 
-          product.category === 'women' ? 'women' : 
-          'unisex',
-  // Add section property for menu filtering
-  section: product.category === 'tech' ? 'tech' : 
-           product.category === 'men' ? 'men' : 
-           product.category === 'women' ? 'women' : 
-           'unisex',
-  // Ensure all products have required fields
-  rating: product.reviews?.length > 0 
-    ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length 
-    : 4.5,
-  reviews: product.reviews?.length || Math.floor(Math.random() * 500) + 100,
-  inStock: product.inStock !== undefined ? product.inStock : true,
-  featured: product.featured || false,
-  // Add badge if not present
-  badge: product.badge || (product.featured ? '🔥 Bestseller' : '✅ Verified'),
-  // Ensure imageSrc is available for compatibility
-  imageSrc: product.image || product.imageSrc
-}));
-
-// Base products with enhanced metadata
-const categorizedBaseProducts = baseProducts.map(product => ({
+// Enhanced base products with proper metadata
+const enhancedBaseProducts = baseProducts.map(product => ({
   ...product,
   // Add gender property based on category analysis
   gender: product.category === 'running' || product.category === 'training' || product.category === 'basketball' || product.category === 'soccer' ? 
@@ -67,20 +36,8 @@ const categorizedBaseProducts = baseProducts.map(product => ({
   warranty: '1 Year Manufacturer Warranty'
 }));
 
-// Merge all products ensuring no duplicates
-const mergedProductIds = new Set();
-export const allProducts = [
-  ...categorizedEnhancedProducts.filter(product => {
-    if (mergedProductIds.has(product.id)) return false;
-    mergedProductIds.add(product.id);
-    return true;
-  }),
-  ...categorizedBaseProducts.filter(product => {
-    if (mergedProductIds.has(product.id)) return false;
-    mergedProductIds.add(product.id);
-    return true;
-  })
-];
+// Export enhanced products
+export const allProducts = enhancedBaseProducts;
 
 // Helper functions for filtering
 export const getProductsByCategory = (category) => {
