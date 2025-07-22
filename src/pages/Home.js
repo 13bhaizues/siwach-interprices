@@ -92,7 +92,7 @@ export default function Home() {
   return (
     <div className="bg-black text-white overflow-hidden">
       {/* Hero Carousel Section */}
-      <section className="relative h-[60vh] sm:h-[70vh] md:h-screen overflow-hidden">
+      <section className="relative h-screen overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -127,7 +127,7 @@ export default function Home() {
                         initial={{ y: 30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-2xl sm:text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-none text-white font-display"
+                        className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tighter leading-[0.9] text-white font-display"
                       >
                         {heroSlides[currentSlide].title}
                       </motion.h1>
@@ -135,7 +135,7 @@ export default function Home() {
                         initial={{ y: 30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="text-xs sm:text-sm md:text-lg lg:text-2xl xl:text-4xl font-light text-gray-300 tracking-wide mt-2 sm:mt-4 leading-relaxed"
+                        className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light text-gray-200 tracking-wide mt-6 leading-[1.4]"
                       >
                         {heroSlides[currentSlide].subtitle}
                       </motion.h2>
@@ -145,7 +145,7 @@ export default function Home() {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.8, delay: 0.8 }}
-                      className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-300 max-w-2xl leading-relaxed font-light"
+                      className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl leading-[1.6] font-light"
                     >
                       {heroSlides[currentSlide].description}
                     </motion.p>
@@ -154,13 +154,16 @@ export default function Home() {
                       initial={{ y: 30, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.8, delay: 1 }}
+                      className="mt-8"
                     >
                       <Link
                         to={heroSlides[currentSlide].ctaLink}
-                        className="inline-flex items-center bg-accent text-white px-4 sm:px-6 lg:px-8 xl:px-12 py-2 sm:py-3 lg:py-4 font-bold text-xs sm:text-sm lg:text-base xl:text-lg tracking-wide hover:bg-accent-600 transition-all duration-300 transform hover:scale-105 shadow-glow rounded-xl"
+                        className="inline-flex items-center bg-white text-black px-8 sm:px-10 lg:px-12 xl:px-16 py-4 sm:py-5 lg:py-6 font-bold text-base sm:text-lg lg:text-xl tracking-wide hover:bg-gray-100 transition-all duration-300 transform hover:scale-[1.02] shadow-2xl"
                       >
                         {heroSlides[currentSlide].cta}
-                        <PlayIcon className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
+                        <svg className="ml-3 h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
                       </Link>
                     </motion.div>
                   </motion.div>
@@ -216,9 +219,9 @@ export default function Home() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gray-950 relative">
+      <section className="py-20 sm:py-24 lg:py-32 bg-white relative">
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-hero-pattern opacity-20" />
+        <div className="absolute inset-0 bg-gray-50" />
         
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -229,22 +232,22 @@ export default function Home() {
             className="text-center mb-8 sm:mb-12 lg:mb-20"
           >
             <div className="inline-block mb-2 sm:mb-3 lg:mb-6">
-              <span className="text-xs sm:text-sm font-bold tracking-[0.3em] text-accent uppercase">
+              <span className="text-sm sm:text-base font-bold tracking-[0.2em] text-accent uppercase">
                 Premium Collection
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black mb-2 sm:mb-3 lg:mb-6 tracking-tight font-display">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 sm:mb-6 lg:mb-8 tracking-tight font-display text-black leading-[0.9]">
               FEATURED
-              <span className="block gradient-text">
+              <span className="block text-accent">
                 PRODUCTS
               </span>
             </h2>
-            <p className="text-sm sm:text-base lg:text-xl text-gray-400 max-w-2xl mx-auto font-light">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto font-light leading-[1.6]">
               Engineered for excellence. Designed for champions. Discover our most coveted pieces.
             </p>
           </motion.div>
 
-          {/* Enhanced Product Grid */}
+          {/* Premium Product Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {featuredProducts.slice(0, 4).map((product, index) => (
               <ProductCard
@@ -266,7 +269,7 @@ export default function Home() {
           >
             <Link
               to="/products"
-              className="inline-block bg-gradient-to-r from-accent to-accent-600 text-white px-4 sm:px-6 lg:px-8 xl:px-12 py-2 sm:py-3 lg:py-4 font-bold text-sm sm:text-base lg:text-lg tracking-wide hover:from-accent-600 hover:to-accent-700 transition-all duration-300 transform hover:scale-105 shadow-glow rounded-xl"
+              className="inline-block bg-black text-white px-8 sm:px-10 lg:px-12 xl:px-16 py-4 sm:py-5 lg:py-6 font-bold text-base sm:text-lg lg:text-xl tracking-wide hover:bg-gray-900 transition-all duration-300 transform hover:scale-[1.02] shadow-2xl"
             >
               VIEW ALL PRODUCTS
             </Link>
@@ -275,7 +278,7 @@ export default function Home() {
       </section>
 
       {/* Trust & Credibility Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white text-black">
+      <section className="py-16 sm:py-20 lg:py-24 bg-gray-50 text-black">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -284,13 +287,13 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6 tracking-tight leading-[1.1]">
               WHY CHOOSE
               <span className="block text-accent">
                 SIWACH ENTERPRISES
               </span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
+            <p className="text-gray-600 max-w-3xl mx-auto text-base sm:text-lg lg:text-xl leading-[1.6]">
               Your satisfaction is our priority. We're committed to delivering excellence in every aspect.
             </p>
           </motion.div>
@@ -299,22 +302,22 @@ export default function Home() {
             {[
               {
                 icon: CheckCircleIcon,
-                title: '100% Secure Checkout',
+                title: 'Secure Checkout',
                 description: 'SSL encrypted payments with multiple secure payment options'
               },
               {
                 icon: ArrowPathIcon,
-                title: 'Easy 30-Day Returns',
+                title: '30-Day Returns',
                 description: 'Hassle-free returns and exchanges within 30 days'
               },
               {
                 icon: TruckIcon,
-                title: 'Free Shipping ₹999+',
+                title: 'Free Shipping',
                 description: 'Complimentary shipping on orders above ₹999 across India'
               },
               {
                 icon: PhoneIcon,
-                title: '24/7 Customer Support',
+                title: '24/7 Support',
                 description: 'Dedicated support team available via WhatsApp and email'
               }
             ].map((feature, index) => (
@@ -326,11 +329,11 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="text-center group"
               >
-                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors duration-300">
+                <div className="w-20 h-20 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-all duration-300 group-hover:scale-105">
                   <feature.icon className="h-8 w-8 text-accent" />
                 </div>
-                <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold mb-3 text-black">{feature.title}</h3>
+                <p className="text-gray-600 text-base leading-[1.6]">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -338,7 +341,7 @@ export default function Home() {
       </section>
 
       {/* Brand Story Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gray-50">
+      <section className="py-20 sm:py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div
@@ -349,10 +352,10 @@ export default function Home() {
               className="space-y-6"
             >
               <div>
-                <span className="text-sm font-bold tracking-[0.3em] text-accent uppercase mb-4 block">
+                <span className="text-base font-bold tracking-[0.2em] text-accent uppercase mb-6 block">
                   Our Journey
                 </span>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-6 tracking-tight">
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-black mb-8 tracking-tight leading-[1.1]">
                   BUILT FOR THE
                   <span className="block text-accent">
                     BOLD
@@ -360,18 +363,18 @@ export default function Home() {
                 </h2>
               </div>
               
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                <p className="text-base sm:text-lg">
+              <div className="space-y-6 text-gray-700 leading-[1.7]">
+                <p className="text-lg sm:text-xl">
                   <strong className="text-black">Started in India. Built for the world.</strong> Siwach Enterprises 
                   emerged from Mumbai with a vision to create premium sportswear that embodies the spirit of Indian athletes.
                 </p>
                 
-                <p>
+                <p className="text-lg sm:text-xl">
                   We don't just manufacture products; we engineer experiences. Every stitch tells a story of 
                   innovation, every design embodies the fusion of traditional craftsmanship with cutting-edge technology.
                 </p>
                 
-                <p>
+                <p className="text-lg sm:text-xl">
                   From local training grounds to international arenas, Siwach has become synonymous with 
                   <strong className="text-accent"> performance</strong>, 
                   <strong className="text-black"> authenticity</strong>, and 
@@ -379,18 +382,18 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-3 gap-6 pt-6">
+              <div className="grid grid-cols-3 gap-8 pt-8">
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-black text-accent mb-2">2019</div>
-                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider">Founded</div>
+                  <div className="text-3xl sm:text-4xl font-black text-accent mb-3">2019</div>
+                  <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">Founded</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-black text-black mb-2">100K+</div>
-                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider">Customers</div>
+                  <div className="text-3xl sm:text-4xl font-black text-black mb-3">100K+</div>
+                  <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">Customers</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-black text-accent mb-2">500+</div>
-                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider">Products</div>
+                  <div className="text-3xl sm:text-4xl font-black text-accent mb-3">500+</div>
+                  <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">Products</div>
                 </div>
               </div>
             </motion.div>
@@ -406,14 +409,14 @@ export default function Home() {
                 <img
                   src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
                   alt="Siwach Athletes Training"
-                  className="w-full h-96 sm:h-[500px] object-cover rounded-2xl shadow-2xl"
+                  className="w-full h-[400px] sm:h-[500px] lg:h-[600px] object-cover rounded-3xl shadow-2xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-3xl" />
                 
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute top-6 right-6 bg-white text-black px-4 py-2 font-bold tracking-wider rounded-lg shadow-lg"
+                  className="absolute top-8 right-8 bg-white text-black px-6 py-3 font-bold tracking-wider rounded-xl shadow-xl"
                 >
                   MADE IN INDIA
                 </motion.div>
@@ -424,7 +427,7 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-8 sm:py-12 lg:py-24 bg-black relative">
+      <section className="py-20 sm:py-24 lg:py-32 bg-gray-900 relative">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -433,9 +436,9 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-6 sm:mb-8 lg:mb-20"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-black mb-2 sm:mb-3 lg:mb-6 tracking-tight font-display">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 sm:mb-6 lg:mb-8 tracking-tight font-display leading-[0.9]">
               SHOP BY
-              <span className="block gradient-text">
+              <span className="block text-accent">
                 CATEGORY
               </span>
             </h2>
@@ -471,7 +474,7 @@ export default function Home() {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden card-premium h-32 sm:h-40 lg:h-48 xl:h-64"
+                className="group relative overflow-hidden bg-gray-800 border border-gray-700 hover:border-gray-600 transition-all duration-500 h-64 sm:h-72 lg:h-80 xl:h-96 rounded-2xl"
               >
                 <Link to={category.href} className="block h-full">
                   <div className="absolute inset-0">
@@ -481,23 +484,23 @@ export default function Home() {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   </div>
 
-                  <div className="relative z-10 h-full flex items-end p-3 sm:p-4 lg:p-6">
+                  <div className="relative z-10 h-full flex items-end p-6 sm:p-8">
                     <div>
-                      <div className="text-xs text-accent uppercase tracking-wider font-bold mb-1">
+                      <div className="text-sm text-accent uppercase tracking-wider font-bold mb-2">
                         {category.stats}
                       </div>
-                      <h3 className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-black text-white group-hover:text-accent transition-colors duration-300 mb-1 sm:mb-2">
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white group-hover:text-accent transition-colors duration-300 mb-3">
                         {category.name}
                       </h3>
-                      <p className="text-gray-300 mb-1 sm:mb-2 lg:mb-3 text-xs sm:text-sm">
+                      <p className="text-gray-200 mb-4 text-base sm:text-lg leading-[1.5]">
                         {category.description}
                       </p>
                       <div className="flex items-center text-accent group-hover:text-white transition-colors duration-300">
-                        <span className="font-bold text-xs sm:text-sm">EXPLORE</span>
-                        <ChevronRightIcon className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                        <span className="font-bold text-base">EXPLORE COLLECTION</span>
+                        <ChevronRightIcon className="ml-3 h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" />
                       </div>
                     </div>
                   </div>
@@ -509,7 +512,7 @@ export default function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-accent/10 via-white to-accent/5">
+      <section className="py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-accent/5 via-white to-accent/10">
         <div className="max-w-4xl mx-auto text-center px-3 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -519,36 +522,36 @@ export default function Home() {
             className="space-y-8"
           >
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-4 tracking-tight">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-black mb-6 tracking-tight leading-[1.1]">
                 STAY IN THE
                 <span className="block text-accent">
                   LOOP
                 </span>
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
+              <p className="text-gray-600 max-w-3xl mx-auto text-base sm:text-lg lg:text-xl leading-[1.6]">
                 Get exclusive access to new releases, special offers, and insider content. 
-                Join 10K+ athletes who never miss a drop.
+                Join 100K+ athletes who never miss a drop.
               </p>
             </div>
 
-            <form className="max-w-lg mx-auto">
+            <form className="max-w-2xl mx-auto">
               <div className="flex flex-col sm:flex-row gap-4">
                 <input
                   type="email"
                   placeholder="Enter your email address"
                   required
-                  className="flex-1 px-6 py-4 bg-white border-2 border-gray-200 text-black placeholder-gray-500 focus:outline-none focus:border-accent transition-colors duration-300 rounded-xl"
+                  className="flex-1 px-6 py-5 bg-white border-2 border-gray-200 text-black placeholder-gray-500 focus:outline-none focus:border-accent transition-colors duration-300 rounded-2xl text-lg"
                 />
                 <button
                   type="submit"
-                  className="px-8 py-4 bg-accent text-white font-bold hover:bg-accent-600 transition-colors duration-300 rounded-xl"
+                  className="px-10 py-5 bg-accent text-white font-bold hover:bg-accent-600 transition-all duration-300 transform hover:scale-[1.02] rounded-2xl text-lg shadow-xl"
                 >
                   SUBSCRIBE
                 </button>
               </div>
             </form>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-gray-600 text-sm">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-gray-600 text-base">
               <div className="flex items-center gap-2">
                 <span>✅</span>
                 <span>Early access to sales</span>
@@ -567,11 +570,11 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-8 sm:py-12 lg:py-24 bg-gradient-to-br from-accent/20 via-black to-black relative overflow-hidden">
+      <section className="py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-accent/20 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-20 sm:w-32 lg:w-40 h-20 sm:h-32 lg:h-40 bg-blue-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-20 left-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
         </div>
 
         <div className="max-w-4xl mx-auto text-center px-3 sm:px-6 lg:px-8 relative z-10">
@@ -581,18 +584,18 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black mb-3 sm:mb-4 lg:mb-6 font-display">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 sm:mb-8 font-display leading-[0.9]">
               READY TO ELEVATE
-              <span className="block gradient-text">
+              <span className="block text-accent">
                 YOUR GAME?
               </span>
             </h2>
-            <p className="text-sm sm:text-base lg:text-xl text-gray-300 mb-4 sm:mb-6 lg:mb-8 max-w-2xl mx-auto font-light">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-200 mb-8 sm:mb-10 lg:mb-12 max-w-3xl mx-auto font-light leading-[1.6]">
               Join thousands of athletes who trust our premium gear to push their limits and achieve greatness.
             </p>
             <Link
               to="/products"
-              className="inline-block bg-gradient-to-r from-accent to-accent-600 text-white px-4 sm:px-6 lg:px-8 xl:px-12 py-2 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-xl font-bold tracking-wide hover:from-accent-600 hover:to-accent-700 transition-all duration-300 transform hover:scale-105 shadow-glow-lg rounded-xl"
+              className="inline-block bg-white text-black px-10 sm:px-12 lg:px-16 py-5 sm:py-6 lg:py-7 text-base sm:text-lg lg:text-xl font-bold tracking-wide hover:bg-gray-100 transition-all duration-300 transform hover:scale-[1.02] shadow-2xl rounded-2xl"
             >
               SHOP ALL PRODUCTS
             </Link>

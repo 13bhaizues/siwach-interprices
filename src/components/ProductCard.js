@@ -101,14 +101,14 @@ export default function ProductCard({ product, index = 0, className = '' }) {
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`group relative bg-black border border-gray-800 overflow-hidden hover:border-gray-600 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 ${className}`}
+      className={`group relative bg-white border border-gray-200 overflow-hidden hover:border-gray-300 transition-all duration-500 hover:shadow-2xl hover:shadow-black/10 rounded-2xl ${className}`}
     >
       <Link to={`/product/${product.id}`} className="block">
         {/* Badges */}
         <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
           {product.badge && <ProductBadge badge={product.badge} />}
           {discountPercentage > 0 && (
-            <div className="bg-red-600 text-white px-2 py-1 text-xs font-bold rounded">
+            <div className="bg-red-600 text-white px-3 py-1.5 text-xs font-bold rounded-lg">
               -{discountPercentage}%
             </div>
           )}
@@ -117,19 +117,19 @@ export default function ProductCard({ product, index = 0, className = '' }) {
         {/* Wishlist */}
         <button
           onClick={handleWishlistToggle}
-          className="absolute top-4 right-4 z-20 p-2 bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-colors duration-200"
+          className="absolute top-4 right-4 z-20 p-2.5 bg-white/90 backdrop-blur-sm hover:bg-white transition-colors duration-200 rounded-full shadow-lg"
         >
           {isWishlisted ? (
             <HeartIconSolid className="h-5 w-5 text-red-500" />
           ) : (
-            <HeartIcon className="h-5 w-5 text-white" />
+            <HeartIcon className="h-5 w-5 text-gray-600" />
           )}
         </button>
 
         {/* Image */}
-        <div className="relative overflow-hidden aspect-square bg-gray-900">
+        <div className="relative overflow-hidden aspect-square bg-gray-100">
           {!imageLoaded && (
-            <div className="absolute inset-0 bg-gray-800 animate-pulse" />
+            <div className="absolute inset-0 bg-gray-200 animate-pulse" />
           )}
           <img
             src={imgSrc}
@@ -140,28 +140,28 @@ export default function ProductCard({ product, index = 0, className = '' }) {
             onLoad={() => setImageLoaded(true)}
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
 
           {/* Quick actions */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/40">
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/30">
             <div className="flex gap-3">
               <motion.button
                 onClick={handleBuyNow}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-black p-2 sm:p-3 font-bold hover:bg-gray-100 transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-cyan-500/30 transform hover:scale-103"
+                className="bg-white text-black p-3 font-bold hover:bg-gray-100 transition-all duration-200 flex items-center gap-2 shadow-xl rounded-xl"
               >
-                <EyeIcon className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm">BUY</span>
+                <EyeIcon className="h-4 w-4" />
+                <span className="text-sm font-bold">BUY</span>
               </motion.button>
               <motion.button
                 onClick={handleAddToCart}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white p-2 sm:p-3 font-bold hover:bg-white hover:text-black transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-cyan-500/30 transform hover:scale-103"
+                className="bg-black text-white p-3 font-bold hover:bg-gray-800 transition-all duration-200 flex items-center gap-2 shadow-xl rounded-xl"
               >
-                <ShoppingBagIcon className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm">ADD</span>
+                <ShoppingBagIcon className="h-4 w-4" />
+                <span className="text-sm font-bold">ADD</span>
               </motion.button>
             </div>
           </div>
@@ -175,15 +175,15 @@ export default function ProductCard({ product, index = 0, className = '' }) {
 
         {/* Info */}
         <div className="p-3 sm:p-4 lg:p-6 space-y-3">
-          <div className="text-xs text-blue-400 uppercase tracking-wider font-bold">
+          <div className="text-xs text-accent uppercase tracking-wider font-bold">
             {product.category}
           </div>
 
-          <h3 className="text-sm sm:text-base lg:text-lg font-bold group-hover:text-blue-400 transition-colors duration-300 leading-tight line-clamp-2">
+          <h3 className="text-base sm:text-lg lg:text-xl font-bold text-black group-hover:text-accent transition-colors duration-300 leading-tight line-clamp-2">
             {product.name}
           </h3>
 
-          <p className="text-sm text-gray-400 leading-relaxed line-clamp-2">
+          <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
             {product.description}
           </p>
 
@@ -193,7 +193,7 @@ export default function ProductCard({ product, index = 0, className = '' }) {
           </div>
 
           <div className="flex items-center gap-3 pt-2">
-            <span className="text-lg sm:text-xl lg:text-2xl font-black text-white">
+            <span className="text-lg sm:text-xl lg:text-2xl font-black text-black">
               ₹{product.price.toLocaleString()}
             </span>
             {product.originalPrice && (
@@ -217,13 +217,13 @@ export default function ProductCard({ product, index = 0, className = '' }) {
           <div className="flex gap-2 pt-4">
             <button
               onClick={handleBuyNow}
-              className="flex-1 bg-white text-black py-2 px-3 sm:px-4 font-bold text-xs sm:text-sm hover:bg-gray-100 transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
+              className="flex-1 bg-black text-white py-3 px-4 font-bold text-sm hover:bg-gray-800 transition-all duration-300 transform hover:scale-[1.02] shadow-lg rounded-xl"
             >
               BUY NOW
             </button>
             <button
               onClick={handleAddToCart}
-              className="flex-1 border-2 border-white text-white py-2 px-3 sm:px-4 font-bold text-xs sm:text-sm hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
+              className="flex-1 border-2 border-black text-black py-3 px-4 font-bold text-sm hover:bg-black hover:text-white transition-all duration-300 transform hover:scale-[1.02] shadow-lg rounded-xl"
             >
               ADD TO CART
             </button>

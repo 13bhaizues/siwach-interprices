@@ -19,8 +19,8 @@
     -moz-osx-font-smoothing: grayscale;
     color: #ffffff;
     background-color: #000000;
-    font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-    line-height: 1.6;
+    font-family: 'Inter', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.5;
     background-image: 
       radial-gradient(circle at 25% 25%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
       radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
@@ -47,19 +47,19 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-accent text-white font-bold py-4 px-8 rounded-xl hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-all duration-300 transform hover:scale-105 shadow-glow;
+    @apply bg-accent text-white font-bold py-4 px-8 rounded-2xl hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-all duration-300 transform hover:scale-[1.02] shadow-xl;
   }
 
   .btn-secondary {
-    @apply bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-xl hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all duration-300 transform hover:scale-105;
+    @apply bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-2xl hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all duration-300 transform hover:scale-[1.02];
   }
 
   .btn-glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold py-4 px-8 rounded-xl hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/50 transition-all duration-300 transform hover:scale-105;
+    @apply bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold py-4 px-8 rounded-2xl hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/50 transition-all duration-300 transform hover:scale-[1.02];
   }
 
   .input-field {
-    @apply appearance-none block w-full px-4 py-3 border border-gray-700 bg-gray-900/50 backdrop-blur-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors duration-300 rounded-xl;
+    @apply appearance-none block w-full px-4 py-3 border border-gray-700 bg-gray-900/50 backdrop-blur-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors duration-300 rounded-2xl;
   }
 
   .gradient-text {
@@ -83,11 +83,11 @@
   }
 
   .card-premium {
-    @apply bg-gray-900/80 backdrop-blur-md border border-gray-800/50 rounded-2xl shadow-dark hover:shadow-dark-lg transition-all duration-500 hover:border-accent/30;
+    @apply bg-white border border-gray-200 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:border-gray-300;
   }
 
   .card-glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-glass hover:bg-white/10 transition-all duration-500;
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl shadow-glass hover:bg-white/10 transition-all duration-500;
   }
 
   .shimmer {
@@ -250,13 +250,13 @@ textarea:focus-visible {
 /* Improved button hover states */
 button:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* Enhanced card hover effects */
 .card-premium:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
 /* Smooth image loading */
