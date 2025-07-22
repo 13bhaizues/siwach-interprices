@@ -1,16 +1,4 @@
-import { pgTable, text, float4, boolean, uuid } from "drizzle-orm/pg-core";
 
-export const products = pgTable("products", {
-  id: uuid("id").defaultRandom().primaryKey(),        // Not Nullable, Unique
-  name: text("name").notNull(),                       // Not Nullable
-  description: text("description"),                   // Nullable
-  price: float4("price").notNull(),                   // Not Nullable
-  image_url: text("image_url"),                       // Nullable
-  in_stock: boolean("in_stock").notNull(),            // Not Nullable
-  rating: float4("rating"),                           // Nullable
-  original_price: float4("original_price"),           // Nullable
-  category: text("category").notNull(),               // Not Nullable
-};
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
