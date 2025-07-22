@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeftIcon, ChevronRightIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { ChevronLeftIcon, ChevronRightIcon, PlayIcon, CheckCircleIcon, TruckIcon, ArrowPathIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { getFeaturedProducts } from '../data/allProducts';
+import ProductCard from '../components/ProductCard';
 
 // Hero carousel data with premium dark imagery
 const heroSlides = [
@@ -215,7 +216,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-8 sm:py-12 lg:py-24 bg-gray-950 relative">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gray-950 relative">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-hero-pattern opacity-20" />
         
@@ -225,7 +226,7 @@ export default function Home() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-6 sm:mb-8 lg:mb-20"
+            className="text-center mb-8 sm:mb-12 lg:mb-20"
           >
             <div className="inline-block mb-2 sm:mb-3 lg:mb-6">
               <span className="text-xs sm:text-sm font-bold tracking-[0.3em] text-accent uppercase">
@@ -243,82 +244,17 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-8"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            {featuredProducts.map((product, index) => (
-              <motion.div
+          {/* Enhanced Product Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            {featuredProducts.slice(0, 4).map((product, index) => (
+              <ProductCard
                 key={product.id}
-                variants={fadeInUp}
-                {...scaleOnHover}
-                className="card-premium group overflow-hidden"
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-32 sm:h-40 lg:h-48 xl:h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  
-                  <div className="absolute top-2 sm:top-3 lg:top-4 right-2 sm:right-3 lg:right-4 bg-green-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold">
-                    In Stock
-                  </div>
-
-                  {/* Quick Actions Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/40">
-                    <div className="flex gap-2 sm:gap-3">
-                      <Link
-                        to={`/product/${product.id}`}
-                        className="bg-white text-black px-2 sm:px-3 lg:px-4 xl:px-6 py-1 sm:py-2 lg:py-3 font-bold hover:bg-gray-100 transition-colors duration-200 rounded-xl text-xs sm:text-sm"
-                      >
-                        BUY
-                      </Link>
-                      <button className="bg-accent text-white px-2 sm:px-3 lg:px-4 xl:px-6 py-1 sm:py-2 lg:py-3 font-bold hover:bg-accent-600 transition-colors duration-200 rounded-xl text-xs sm:text-sm">
-                        ADD TO CART
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-2 sm:p-3 lg:p-6">
-                  <div className="text-xs text-accent uppercase tracking-wider font-bold mb-1 sm:mb-2">
-                    {product.category}
-                  </div>
-                  
-                  <h3 className="text-xs sm:text-sm lg:text-base xl:text-xl font-bold group-hover:text-accent transition-colors duration-300 leading-tight mb-2 sm:mb-3 line-clamp-2">
-                    {product.name}
-                  </h3>
-                  
-                  <p className="text-gray-400 leading-relaxed mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm line-clamp-2">
-                    {product.description}
-                  </p>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-black text-white">
-                        ₹{product.price.toLocaleString()}
-                      </span>
-                      {product.originalPrice && (
-                        <span className="text-xs sm:text-sm lg:text-base text-gray-500 line-through">
-                          ₹{product.originalPrice.toLocaleString()}
-                        </span>
-                      )}
-                    </div>
-                    
-                    <span className="text-xs font-bold text-green-400">
-                      ✅ In Stock
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
+                product={product}
+                index={index}
+                className="h-full"
+              />
             ))}
-          </motion.div>
+          </div>
 
           {/* View All CTA */}
           <motion.div
@@ -326,7 +262,7 @@ export default function Home() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mt-6 sm:mt-8 lg:mt-20"
+            className="text-center mt-12 sm:mt-16 lg:mt-20"
           >
             <Link
               to="/products"
@@ -335,6 +271,155 @@ export default function Home() {
               VIEW ALL PRODUCTS
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Trust & Credibility Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-white text-black">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-4 tracking-tight">
+              WHY CHOOSE
+              <span className="block text-accent">
+                SIWACH ENTERPRISES
+              </span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
+              Your satisfaction is our priority. We're committed to delivering excellence in every aspect.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {[
+              {
+                icon: CheckCircleIcon,
+                title: '100% Secure Checkout',
+                description: 'SSL encrypted payments with multiple secure payment options'
+              },
+              {
+                icon: ArrowPathIcon,
+                title: 'Easy 30-Day Returns',
+                description: 'Hassle-free returns and exchanges within 30 days'
+              },
+              {
+                icon: TruckIcon,
+                title: 'Free Shipping ₹999+',
+                description: 'Complimentary shipping on orders above ₹999 across India'
+              },
+              {
+                icon: PhoneIcon,
+                title: '24/7 Customer Support',
+                description: 'Dedicated support team available via WhatsApp and email'
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center group"
+              >
+                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors duration-300">
+                  <feature.icon className="h-8 w-8 text-accent" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Brand Story Section */}
+      <section className="py-12 sm:py-16 lg:py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <div>
+                <span className="text-sm font-bold tracking-[0.3em] text-accent uppercase mb-4 block">
+                  Our Journey
+                </span>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-6 tracking-tight">
+                  BUILT FOR THE
+                  <span className="block text-accent">
+                    BOLD
+                  </span>
+                </h2>
+              </div>
+              
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <p className="text-base sm:text-lg">
+                  <strong className="text-black">Started in India. Built for the world.</strong> Siwach Enterprises 
+                  emerged from Mumbai with a vision to create premium sportswear that embodies the spirit of Indian athletes.
+                </p>
+                
+                <p>
+                  We don't just manufacture products; we engineer experiences. Every stitch tells a story of 
+                  innovation, every design embodies the fusion of traditional craftsmanship with cutting-edge technology.
+                </p>
+                
+                <p>
+                  From local training grounds to international arenas, Siwach has become synonymous with 
+                  <strong className="text-accent"> performance</strong>, 
+                  <strong className="text-black"> authenticity</strong>, and 
+                  <strong className="text-accent"> bold ambition</strong>.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-3 gap-6 pt-6">
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-black text-accent mb-2">2019</div>
+                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider">Founded</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-black text-black mb-2">100K+</div>
+                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider">Customers</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-black text-accent mb-2">500+</div>
+                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider">Products</div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative">
+                <img
+                  src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                  alt="Siwach Athletes Training"
+                  className="w-full h-96 sm:h-[500px] object-cover rounded-2xl shadow-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-2xl" />
+                
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute top-6 right-6 bg-white text-black px-4 py-2 font-bold tracking-wider rounded-lg shadow-lg"
+                >
+                  MADE IN INDIA
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -362,19 +447,22 @@ export default function Home() {
                 name: "Men's Collection",
                 image: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
                 href: '/products?category=men',
-                description: 'Engineered for peak performance'
+                description: 'Engineered for peak performance',
+                stats: '200+ Products'
               },
               {
                 name: "Women's Collection",
                 image: 'https://images.pexels.com/photos/7432771/pexels-photo-7432771.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
                 href: '/products?category=women',
-                description: 'Where elegance meets power'
+                description: 'Where elegance meets power',
+                stats: '150+ Products'
               },
               {
                 name: 'Tech Collection',
                 image: 'https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
                 href: '/products?category=tech',
-                description: 'Revolutionary technology'
+                description: 'Revolutionary technology',
+                stats: '50+ Products'
               }
             ].map((category, index) => (
               <motion.div
@@ -398,6 +486,9 @@ export default function Home() {
 
                   <div className="relative z-10 h-full flex items-end p-3 sm:p-4 lg:p-6">
                     <div>
+                      <div className="text-xs text-accent uppercase tracking-wider font-bold mb-1">
+                        {category.stats}
+                      </div>
                       <h3 className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-black text-white group-hover:text-accent transition-colors duration-300 mb-1 sm:mb-2">
                         {category.name}
                       </h3>
@@ -414,6 +505,64 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-accent/10 via-white to-accent/5">
+        <div className="max-w-4xl mx-auto text-center px-3 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-4 tracking-tight">
+                STAY IN THE
+                <span className="block text-accent">
+                  LOOP
+                </span>
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
+                Get exclusive access to new releases, special offers, and insider content. 
+                Join 10K+ athletes who never miss a drop.
+              </p>
+            </div>
+
+            <form className="max-w-lg mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  required
+                  className="flex-1 px-6 py-4 bg-white border-2 border-gray-200 text-black placeholder-gray-500 focus:outline-none focus:border-accent transition-colors duration-300 rounded-xl"
+                />
+                <button
+                  type="submit"
+                  className="px-8 py-4 bg-accent text-white font-bold hover:bg-accent-600 transition-colors duration-300 rounded-xl"
+                >
+                  SUBSCRIBE
+                </button>
+              </div>
+            </form>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-gray-600 text-sm">
+              <div className="flex items-center gap-2">
+                <span>✅</span>
+                <span>Early access to sales</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>🎁</span>
+                <span>Exclusive member discounts</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>📱</span>
+                <span>New product alerts</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
