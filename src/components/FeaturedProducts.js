@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { getEnhancedFeaturedProducts } from '../data/enhancedProducts';
+import { getFeaturedProducts } from '../data/allProducts';
 import ProductCard from './ProductCard';
 
 export default function FeaturedProducts() {
-  const products = getEnhancedFeaturedProducts();
+  const products = getFeaturedProducts();
 
   return (
     <section className="py-24 bg-gray-950 relative overflow-hidden">

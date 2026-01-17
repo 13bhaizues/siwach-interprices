@@ -6,7 +6,12 @@ import { XMarkIcon, FunnelIcon, EyeIcon, HeartIcon, ShoppingBagIcon } from '@her
 import { ChevronDownIcon, StarIcon } from '@heroicons/react/20/solid';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
-import { getEnhancedProductsByCategory, enhancedProducts } from '../data/enhancedProducts';
+import { 
+  getProductsByCategory, 
+  getMenProducts,
+  getWomenProducts,
+  allProducts 
+} from '../data/allProducts';
 
 const sortOptions = [
   { name: 'Most Popular', value: 'popular', current: true },
@@ -72,8 +77,17 @@ export default function Products() {
 
   const category = searchParams.get('category');
   
-  // Get products based on category
-  let products = category ? getEnhancedProductsByCategory(category) : enhancedProducts;
+  // Get products based on category or section
+  let products;
+  if (category === 'men') {
+    products = getMenProducts();
+  } else if (category === 'women') {
+    products = getWomenProducts();
+  } else if (category) {
+    products = getProductsByCategory(category);
+  } else {
+    products = allProducts;
+  }
 
   // Apply additional filters
   Object.keys(selectedFilters).forEach(filterType => {
@@ -143,7 +157,7 @@ export default function Products() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20">
+    <div className="min-h-screen bg-black text-white pt-12 sm:pt-16 lg:pt-20">
       {/* Mobile filter dialog */}
       <Transition.Root show={mobileFiltersOpen} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
@@ -230,19 +244,19 @@ export default function Products() {
         </Dialog>
       </Transition.Root>
 
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <motion.div
-          className="flex items-baseline justify-between border-b border-gray-800 pb-6 pt-8"
+          className="flex items-baseline justify-between border-b border-gray-800 pb-4 sm:pb-6 pt-4 sm:pt-8"
           {...fadeInUp}
         >
           <div>
-            <h1 className="text-5xl md:text-6xl font-black tracking-tight text-white mb-4 font-display">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-2 sm:mb-4 font-display">
               {getCategoryTitle().split(' ')[0]}
               <span className="block gradient-text">
                 {getCategoryTitle().split(' ').slice(1).join(' ')}
               </span>
             </h1>
-            <p className="text-gray-400 font-light">
+            <p className="text-gray-400 font-light text-sm sm:text-base">
               {sortedProducts.length} products available
             </p>
           </div>
@@ -302,7 +316,7 @@ export default function Products() {
           </div>
         </motion.div>
 
-        <section aria-labelledby="products-heading" className="pb-24 pt-6">
+        <section aria-labelledby="products-heading" className="pb-16 sm:pb-24 pt-4 sm:pt-6">
           <h2 id="products-heading" className="sr-only">
             Products
           </h2>
@@ -355,11 +369,12 @@ export default function Products() {
 
             {/* Product grid */}
             <div className="lg:col-span-3">
-              <motion.div 
-                className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
+              <motion.div
+                className="grid grid-cols-1 gap-x-2 gap-y-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-3 sm:gap-y-4 lg:gap-x-4 lg:gap-y-6 xl:gap-x-6 xl:gap-y-8"
                 variants={staggerContainer}
                 initial="initial"
-                animate="animate"
+                whileInView="animate"
+                viewport={{ once: true }}
               >
                 {sortedProducts.map((product, index) => (
                   <motion.div
@@ -373,75 +388,75 @@ export default function Products() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="h-80 w-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                        className="h-32 sm:h-40 lg:h-48 xl:h-64 w-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
                         loading="lazy"
                       />
                       
                       {/* Badge */}
                       {product.badge && (
-                        <div className="absolute top-4 left-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
+                        <div className="absolute top-2 sm:top-3 lg:top-4 left-2 sm:left-3 lg:left-4 bg-accent text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold">
                           {product.badge}
                         </div>
                       )}
                       
                       {/* Discount */}
                       {product.originalPrice && (
-                        <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        <div className="absolute top-2 sm:top-3 lg:top-4 right-2 sm:right-3 lg:right-4 bg-green-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold">
                           {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                         </div>
                       )}
 
                       {/* Quick Actions */}
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                        <div className="flex gap-3">
-                          <button className="p-3 bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors duration-200 rounded-xl">
-                            <EyeIcon className="h-5 w-5" />
+                        <div className="flex gap-2 sm:gap-3">
+                          <button className="p-2 sm:p-3 bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors duration-200 rounded-xl">
+                            <EyeIcon className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
                           </button>
-                          <button className="p-3 bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors duration-200 rounded-xl">
-                            <HeartIcon className="h-5 w-5" />
+                          <button className="p-2 sm:p-3 bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors duration-200 rounded-xl">
+                            <HeartIcon className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
                           </button>
                           <button
                             onClick={() => handleAddToCart(product)}
-                            className="p-3 bg-accent text-white hover:bg-accent-600 transition-colors duration-200 rounded-xl"
+                            className="p-2 sm:p-3 bg-accent text-white hover:bg-accent-600 transition-colors duration-200 rounded-xl"
                           >
-                            <ShoppingBagIcon className="h-5 w-5" />
+                            <ShoppingBagIcon className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
                           </button>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-2">
+                    <div className="p-2 sm:p-3 lg:p-4 xl:p-6">
+                      <div className="flex items-center justify-between mb-1 sm:mb-2">
                         <div className="text-xs text-accent uppercase tracking-wider font-bold">
                           {product.category}
                         </div>
                         {product.reviews?.length > 0 && (
                           <div className="flex items-center">
-                            <StarIcon className="h-4 w-4 text-yellow-400" />
-                            <span className="text-sm text-gray-400 ml-1">
+                            <StarIcon className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400" />
+                            <span className="text-xs sm:text-sm text-gray-400 ml-1">
                               {(product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length).toFixed(1)}
                             </span>
                           </div>
                         )}
                       </div>
                       
-                      <h3 className="text-lg font-bold text-white group-hover:text-accent transition-colors duration-300 leading-tight mb-3">
+                      <h3 className="text-xs sm:text-sm lg:text-base xl:text-lg font-bold text-white group-hover:text-accent transition-colors duration-300 leading-tight mb-1 sm:mb-2 lg:mb-3 line-clamp-2">
                         <Link to={`/product/${product.id}`}>
                           {product.name}
                         </Link>
                       </h3>
                       
-                      <p className="text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">
+                      <p className="text-gray-400 text-xs sm:text-sm mb-2 sm:mb-3 lg:mb-4 line-clamp-2 leading-relaxed">
                         {product.description}
                       </p>
                       
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl font-black text-white">
+                      <div className="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
+                        <div className="flex items-center gap-1 sm:gap-2 lg:gap-3">
+                          <span className="text-sm sm:text-base lg:text-lg xl:text-xl font-black text-white">
                             ₹{product.price.toLocaleString()}
                           </span>
                           {product.originalPrice && (
-                            <span className="text-lg text-gray-500 line-through">
+                            <span className="text-xs sm:text-sm lg:text-base text-gray-500 line-through">
                               ₹{product.originalPrice.toLocaleString()}
                             </span>
                           )}
@@ -452,6 +467,22 @@ export default function Products() {
                         }`}>
                           {product.inStock ? '✅ In Stock' : '❌ Out of Stock'}
                         </span>
+                      </div>
+                      
+                      {/* Mobile CTA Buttons */}
+                      <div className="flex flex-col sm:flex-row gap-1 sm:gap-2">
+                        <button
+                          onClick={() => handleAddToCart(product)}
+                          className="flex-1 bg-transparent border-2 border-white text-white py-1.5 sm:py-2 px-2 sm:px-3 font-bold text-xs hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30"
+                        >
+                          ADD TO CART
+                        </button>
+                        <Link
+                          to={`/checkout?sku=${product.id}`}
+                          className="flex-1 bg-white text-black py-1.5 sm:py-2 px-2 sm:px-3 font-bold text-xs hover:bg-gray-100 transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-cyan-500/30 text-center"
+                        >
+                          BUY NOW
+                        </Link>
                       </div>
                     </div>
                   </motion.div>

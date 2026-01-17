@@ -2,15 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import ProductCard from './ProductCard';
-import { enhancedProducts } from '../data/enhancedProducts';
+import { getProductRecommendations } from '../data/allProducts';
 
 export default function RelatedProducts({ currentProductId, category, className = '' }) {
-  const relatedProducts = enhancedProducts
-    .filter(product => 
-      product.id !== currentProductId && 
-      (product.category === category || product.featured)
-    )
-    .slice(0, 4);
+  const relatedProducts = getProductRecommendations(currentProductId, 4);
 
   if (relatedProducts.length === 0) return null;
 

@@ -1,4 +1,5 @@
 // Enhanced Product Collection for Siwach Enterprises
+
 export const enhancedProducts = [
   // Men's Collection - Premium Athletic Wear
   {
